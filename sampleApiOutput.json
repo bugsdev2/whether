@@ -1,0 +1,59 @@
+{
+    "latitude": 10,
+    "longitude": 76.25,
+    "generationtime_ms": 0.17690658569335938,
+    "utc_offset_seconds": 19800,
+    "timezone": "Asia/Kolkata",
+    "timezone_abbreviation": "IST",
+    "elevation": 9,
+    "current_units": {
+        "time": "iso8601",
+        "interval": "seconds",
+        "temperature_2m": "°C",
+        "relative_humidity_2m": "%",
+        "apparent_temperature": "°C",
+        "is_day": "",
+        "rain": "mm",
+        "showers": "mm",
+        "snowfall": "cm",
+        "weather_code": "wmo code"
+    },
+    "current": {
+        "time": "2024-08-10T23:15",
+        "interval": 900,
+        "temperature_2m": 26.4,
+        "relative_humidity_2m": 90,
+        "apparent_temperature": 32.1,
+        "is_day": 0,
+        "rain": 0,
+        "showers": 0,
+        "snowfall": 0,
+        "weather_code": 3
+    },
+    "daily_units": {
+        "time": "iso8601",
+        "weather_code": "wmo code",
+        "temperature_2m_max": "°C",
+        "temperature_2m_min": "°C",
+        "apparent_temperature_max": "°C",
+        "apparent_temperature_min": "°C",
+        "sunrise": "iso8601",
+        "sunset": "iso8601",
+        "rain_sum": "mm",
+        "showers_sum": "mm",
+        "snowfall_sum": "cm"
+    },
+    "daily": {
+        "time": ["2024-08-10", "2024-08-11", "2024-08-12", "2024-08-13", "2024-08-14", "2024-08-15", "2024-08-16"],
+        "weather_code": [95, 95, 95, 95, 95, 95, 95],
+        "temperature_2m_max": [29.1, 29.6, 30.5, 30.7, 30.7, 30.8, 30.1],
+        "temperature_2m_min": [25.6, 25.5, 25.9, 25.8, 26.1, 25.9, 26],
+        "apparent_temperature_max": [34.4, 34.1, 35.8, 36.2, 36.5, 36.4, 35.9],
+        "apparent_temperature_min": [31.5, 30.7, 31.8, 31.6, 32.3, 32, 32],
+        "sunrise": ["2024-08-10T06:15", "2024-08-11T06:15", "2024-08-12T06:15", "2024-08-13T06:15", "2024-08-14T06:15", "2024-08-15T06:15", "2024-08-16T06:15"],
+        "sunset": ["2024-08-10T18:44", "2024-08-11T18:44", "2024-08-12T18:44", "2024-08-13T18:43", "2024-08-14T18:43", "2024-08-15T18:42", "2024-08-16T18:42"],
+        "rain_sum": [0, 0, 0, 0, 0, 0, 0],
+        "showers_sum": [12.9, 11.6, 3.5, 7.9, 3.9, 5.7, 9.6],
+        "snowfall_sum": [0, 0, 0, 0, 0, 0, 0]
+    }
+}
