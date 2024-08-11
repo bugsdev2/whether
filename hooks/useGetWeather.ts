@@ -13,7 +13,7 @@ export const useGetWeather = (latitide: Number, longitude: Number) => {
                 setData(res.data);
             })
             .catch((err) => {
-                setError(err);
+                setError(err.message);
             });
     }, [latitide, longitude]);
 
