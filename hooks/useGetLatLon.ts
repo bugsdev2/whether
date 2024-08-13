@@ -13,7 +13,7 @@ export interface GeoData {
     timezone?: string;
 }
 
-let initialState = [
+let initialState: GeoData[] = [
     {
         admin1: '',
         admin2: '',
@@ -27,20 +27,20 @@ let initialState = [
     },
 ];
 
-export const useGetLanLon = (place: string): [GeoData[], string] => {
+export const useGetLanLon = (place: string): GeoData[] => {
     const [data, setData] = useState<GeoData[]>(initialState);
-    const [error, setError] = useState('');
 
     useEffect(() => {
         axios
-            .get(`https://geocoding-api.open-meteo.com/v1/search?name=${place}&count=10&language=en&format=json`)
+            .get(`http://geocoding-api.open-meteo.com/v1/search?name=${place}&count=10&language=en&format=json`)
             .then((res) => {
+                if (!res.data.results) setData(initialState);
                 setData(res.data.results);
             })
             .catch((err) => {
-                setError(err.message);
+                console.error(err.message);
             });
     }, [place]);
 
-    return [data, error];
+    return data;
 };
