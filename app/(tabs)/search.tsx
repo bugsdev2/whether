@@ -13,32 +13,24 @@ export const Search = (props: { display: string }) => {
 
     const [location, setLocation] = useState<any>();
 
-    getData('weatherData')
-        .then((res) => {
-            console.log(location);
-            setLocation(res);
-        })
-        .catch((err) => {
-            console.log(err.message);
-        });
-
-    const geoData = useGetLanLon(location);
-    const [coordinates, setCoordinates] = useState<{ lat: number; lon: number }>({ lat: 0, lon: 0 });
+    const geoData = useGetLanLon(searchValue);
+    // const [coordinates, setCoordinates] = useState<{ lat: number; lon: number }>({ lat: 0, lon: 0 });
     const [searchSuggestions, setSearchSuggestions] = useState<any>();
 
     const [weatherData, setWeatherData] = useContext(DataContext);
     const [error, setError] = useState('');
 
-    function handleSelection(lat: number, lon: number) {
+    function handleSelection(place: string, lat: number, lon: number) {
+        const data = JSON.stringify({ place, lat, lon });
+        setData('data', data);
+
         const url = `http://api.open-meteo.com/v1/forecast?latitude=${lat.toString()}&longitude=${lon.toString()}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,rain,showers,snowfall,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,rain_sum,showers_sum,snowfall_sum&timezone=auto`;
         axios
             .get(url)
             .then((res) => {
                 setWeatherData(res.data);
-                console.log(weatherData);
             })
             .catch((err) => {
-                console.log(err.message);
                 setError(err.message);
             })
             .finally(() => {
@@ -48,10 +40,13 @@ export const Search = (props: { display: string }) => {
     }
 
     useEffect(() => {
-        if (searchValue) {
-            setLocation(searchValue);
-        }
-    }, [searchValue]);
+        getData('data').then((res) => {
+            if (res) {
+                const { place, lat, lon } = JSON.parse(res);
+                handleSelection(place, lat, lon);
+            }
+        });
+    }, []);
 
     useEffect(() => {
         if (!geoData) {
@@ -60,7 +55,7 @@ export const Search = (props: { display: string }) => {
         const output = geoData?.map((item) => {
             return (
                 <View key={item.id}>
-                    <Pressable className="text-ldark py-2 border-b-2 border-gray-300" onPress={() => handleSelection(item.latitude, item.longitude)}>
+                    <Pressable className="text-ldark py-2 border-b-2 border-gray-300" onPress={() => handleSelection(item.name, item.latitude, item.longitude)}>
                         <Text>
                             {item.name} {item.admin1} {item.admin2} {item.country}
                         </Text>

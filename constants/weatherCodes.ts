@@ -1,4 +1,4 @@
-export default {
+const weatherCodes = {
     '0': {
         day: {
             description: 'Sunny',
@@ -280,3 +280,5 @@ export default {
         },
     },
 };
+
+export default weatherCodes;
