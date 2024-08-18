@@ -1,6 +1,6 @@
-import { View, Text, Pressable, Image } from 'react-native';
+import { View, Text, Pressable, Image, StyleSheet } from 'react-native';
 
-import { useEffect, useState, useContext, createContext } from 'react';
+import { useEffect, useState, createContext } from 'react';
 
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
@@ -18,6 +18,9 @@ import { getData } from '@/helpers/storage';
 
 import wCodes from '@/constants/weatherCodes';
 
+import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
+import { useFonts } from 'expo-font';
+
 interface WeatherCondition {
     day: {
         description: string;
@@ -30,6 +33,10 @@ interface WeatherCondition {
 }
 
 export default function App() {
+    const [fontsLoaded] = useFonts({
+        PortLligatSlab_400Regular,
+    });
+
     const [display, setDisplay] = useState('hidden');
 
     const [weatherData, setWeatherData] = useState<WeatherData>();
@@ -49,62 +56,84 @@ export default function App() {
         if (key) {
             setWeatherCondition(weatherCodes[key]);
         }
+
         getData('data').then((res) => {
             if (res) {
                 const { place, lat, lon } = JSON.parse(res);
                 setLocation(place);
             }
         });
-    }, [weatherCondition, weatherCode]);
+    }, [weatherData]);
 
     function handleSearch() {
         setDisplay('block');
     }
 
-    return (
-        <DataContext.Provider value={[weatherData, setWeatherData]}>
-            <View className="flex-1">
-                <Search display={display} />
-                <StatusBar hidden />
-                <LinearGradient
-                    className="flex-1"
-                    colors={['#151515', '#242424']}
-                    start={{
-                        x: 0,
-                        y: 0,
-                    }}
-                    end={{
-                        x: 0,
-                        y: 1,
-                    }}
-                >
-                    <View id="search">
-                        <Pressable className="absolute top-4 right-4 cursor-pointer" onPress={handleSearch}>
-                            <Feather name="search" color="#fbfbfb" size={24} />
-                        </Pressable>
-                    </View>
-                    <View id="content" className="items-center mt-16">
-                        <View className="items-center">
-                            <Text className="text-light text-2xl mb-2">{location}</Text>
-                            <View className="bg-ldark w-72 h-72 rounded-3xl justify-evenly items-center p-3">
-                                <View className="items-center">
-                                    <Text className="text-light text-5xl">
-                                        {weatherData?.current?.temperature_2m}
-                                        {weatherData?.current_units?.temperature_2m}
-                                    </Text>
-                                    <Text className="text-light text-xl">
-                                        Feels like {weatherData?.current?.apparent_temperature}
-                                        {weatherData?.current_units?.apparent_temperature}
+    function handleCloseSearch() {
+        setDisplay('hidden');
+    }
+
+    if (!fontsLoaded) {
+        return (
+            <View className="flex-1 justify-center items-center">
+                <Text>Loading...</Text>
+            </View>
+        );
+    } else {
+        return (
+            <DataContext.Provider value={[weatherData, setWeatherData]}>
+                <View className="flex-1">
+                    <Search display={display} closeDisplay={() => handleCloseSearch()} />
+                    <StatusBar hidden />
+                    <LinearGradient
+                        className="flex-1"
+                        colors={['#151515', '#242424']}
+                        start={{
+                            x: 0,
+                            y: 0,
+                        }}
+                        end={{
+                            x: 0,
+                            y: 1,
+                        }}
+                    >
+                        <View id="search">
+                            <Pressable className="absolute top-4 right-4 cursor-pointer" onPress={handleSearch}>
+                                <Feather name="search" color="#fbfbfb" size={24} />
+                            </Pressable>
+                        </View>
+                        <View id="content" className="items-center mt-16">
+                            <View className="items-center">
+                                <Text style={styles.textFont} className="text-light text-3xl mb-2">
+                                    {location}
+                                </Text>
+                                <View className="bg-ldark w-80 h-80 rounded-3xl justify-evenly items-center p-8">
+                                    <View className="items-center">
+                                        <Text style={styles.textFont} className="text-light text-5xl">
+                                            {weatherData?.current?.temperature_2m}
+                                            {weatherData?.current_units?.temperature_2m}
+                                        </Text>
+                                        <Text style={styles.textFont} className="text-light text-2xl">
+                                            Feels like {weatherData?.current?.apparent_temperature}
+                                            {weatherData?.current_units?.apparent_temperature}
+                                        </Text>
+                                    </View>
+                                    <Image className="h-28 w-28 my-1" source={{ uri: time === 'day' ? weatherCondition?.day?.image : weatherCondition?.night?.image }} />
+                                    <Text style={styles.textFont} className="text-light text-3xl text-center">
+                                        {time === 'day' ? weatherCondition?.day?.description : weatherCondition?.night?.description}
                                     </Text>
                                 </View>
-
-                                <Image className="h-28 w-40" source={{ uri: time === 'day' ? weatherCondition?.day?.image : weatherCondition?.night?.image }} />
-                                <Text className="text-light text-2xl">{time === 'day' ? weatherCondition?.day?.description : weatherCondition?.night?.description}</Text>
                             </View>
                         </View>
-                    </View>
-                </LinearGradient>
-            </View>
-        </DataContext.Provider>
-    );
+                    </LinearGradient>
+                </View>
+            </DataContext.Provider>
+        );
+    }
 }
+
+const styles = StyleSheet.create({
+    textFont: {
+        fontFamily: 'PortLligatSlab_400Regular',
+    },
+});

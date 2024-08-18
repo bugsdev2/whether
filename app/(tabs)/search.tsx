@@ -1,20 +1,18 @@
-import { SafeAreaView, Text, View, TextInput, Pressable, GestureResponderEvent } from 'react-native';
+import { SafeAreaView, Text, View, TextInput, Pressable, StyleSheet } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 
 import { useGetLanLon } from '@/hooks/useGetLatLon';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 import { DataContext } from './app';
 
 import { getData, setData } from '@/helpers/storage';
 
-export const Search = (props: { display: string }) => {
+export const Search = (props: { display: string; closeDisplay: any }) => {
     const [searchValue, setSearchValue] = useState('');
 
-    const [location, setLocation] = useState<any>();
-
     const geoData = useGetLanLon(searchValue);
-    // const [coordinates, setCoordinates] = useState<{ lat: number; lon: number }>({ lat: 0, lon: 0 });
+
     const [searchSuggestions, setSearchSuggestions] = useState<any>();
 
     const [weatherData, setWeatherData] = useContext(DataContext);
@@ -36,6 +34,7 @@ export const Search = (props: { display: string }) => {
             .finally(() => {
                 setListDisplay('hidden');
                 setSearchValue('');
+                props.closeDisplay();
             });
     }
 
