@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useGetLanLon } from '@/hooks/useGetLatLon';
 import axios from 'axios';
 
-import { DataContext } from './app';
+import { DataContext } from '.';
 
 import { getData, setData } from '@/helpers/storage';
 
