@@ -27,7 +27,7 @@ export let initialState: GeoData[] = [
     },
 ];
 
-export const useGetLanLon = (place: string): GeoData[] => {
+export const useGetLanLon = (place: string) => {
     const [data, setData] = useState<GeoData[]>(initialState);
 
     useEffect(() => {
