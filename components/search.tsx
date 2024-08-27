@@ -1,12 +1,20 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import React from 'react';
+import { StyleSheet, TextInput, View } from 'react-native';
+import React, { useState, useContext } from 'react';
 import { Colors } from '@/constants/Colors';
+import { LocationContext } from '@/app';
+import { useGetLanLon } from '@/hooks/useGetLatLon';
 
 const Search = (props: { iconDisplay: () => void }) => {
+    const [searchQuery, setSearchQuery] = useContext(LocationContext);
+
+    function handleSearchQuery(query: string) {
+        // console.log(searchQuery);
+    }
+
     return (
         <View>
             <View style={styles.inputContainer}>
-                <TextInput style={styles.input} placeholder="enter the location here" placeholderTextColor={Colors.darkMode.light} onChangeText={props.iconDisplay} />
+                <TextInput style={styles.input} placeholder="enter the location here" placeholderTextColor={Colors.darkMode.light} onChangeText={handleSearchQuery} />
             </View>
         </View>
     );

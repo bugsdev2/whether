@@ -13,7 +13,7 @@ export interface GeoData {
     timezone?: string;
 }
 
-let initialState: GeoData[] = [
+export let initialState: GeoData[] = [
     {
         admin1: '',
         admin2: '',
