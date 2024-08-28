@@ -8,7 +8,7 @@ export const setData = async (key: string, value: string) => {
     }
 };
 
-export const getData = async (key: string) => {
+export const getData = async (key: string): Promise<string> => {
     try {
         const value = await AsyncStorage.getItem(key);
         if (value !== null) {
@@ -17,4 +17,5 @@ export const getData = async (key: string) => {
     } catch (err) {
         console.log('Error retrieving data: ', err);
     }
+    return '';
 };

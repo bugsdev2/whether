@@ -1,16 +1,9 @@
 import React, { useState, createContext } from 'react';
 import HomeScreen from './(tabs)/homescreen';
+import { LatLonData } from '@/interfaces/latLonData';
 
 export const LocationContext = createContext<{ searchQuery: string; setSearchQuery: React.Dispatch<React.SetStateAction<string>> }>({ searchQuery: '', setSearchQuery: () => {} });
 export const LatLonProvider = createContext<{ latLonData: LatLonData; setLatLonData: React.Dispatch<React.SetStateAction<LatLonData>> }>({ latLonData: { name: '', lat: 0, lon: 0, admin1: '', country: '' }, setLatLonData: () => {} });
-
-export interface LatLonData {
-    name: string;
-    lat: number;
-    lon: number;
-    admin1: string;
-    country: string;
-}
 
 const App = () => {
     const [searchQuery, setSearchQuery] = useState('');

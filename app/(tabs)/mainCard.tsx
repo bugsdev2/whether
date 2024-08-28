@@ -1,19 +1,26 @@
 import { View, Text, StyleSheet, Image } from 'react-native';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Colors } from '@/constants/Colors';
 import { useFonts } from 'expo-font';
 import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
 import { useGetWeatherData } from '@/hooks/useGetWeatherData';
-import { LatLonProvider } from '@/app/index';
+// import { LatLonProvider } from '@/app/index';
 import wcodes from '@/constants/weatherCodes';
 import { processWeatherCode } from '@/helpers/weatherCodeProcessor';
+import { getData } from '@/helpers/storage';
 
 const MainCard = () => {
-    const { latLonData, setLatLonData } = useContext(LatLonProvider);
+    // const { latLonData, setLatLonData } = useContext(LatLonProvider);
     const weatherCodes = wcodes;
 
     const [fontsLoaded] = useFonts({
         fontPort: PortLligatSlab_400Regular,
+    });
+
+    const [latLonData, setLatLonData] = useState<{ name: string; lat: number; lon: number; admin1: string; country: string }>({ name: '', lat: 0, lon: 0, admin1: '', country: '' });
+
+    getData('latLonData').then((data) => {
+        setLatLonData(JSON.parse(data));
     });
 
     const [weatherData, error] = useGetWeatherData(latLonData.name, latLonData.lat!, latLonData.lon!);
@@ -32,7 +39,7 @@ const MainCard = () => {
             <View style={styles.container}>
                 <Text style={[styles.text, styles.location]}>
                     {latLonData.name}
-                    {', ' + latLonData.country}
+                    {latLonData.country ? ', ' + latLonData.country : null}
                 </Text>
                 {/* <View style={styles.hr}></View> */}
                 <View style={styles.card}>
@@ -60,6 +67,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
+        zIndex: -10,
     },
 
     hr: {
@@ -87,24 +95,25 @@ const styles = StyleSheet.create({
 
     location: {
         paddingTop: 10,
-        fontSize: 20,
+        fontSize: 25,
+        textAlign: 'center',
     },
 
     temperature: {
-        fontSize: 30,
+        fontSize: 35,
     },
 
     appTemperature: {
-        fontSize: 20,
+        fontSize: 22,
     },
 
     image: {
         marginVertical: 15,
-        width: 125,
-        height: 125,
+        width: 150,
+        height: 150,
     },
 
     weatherDescription: {
-        fontSize: 20,
+        fontSize: 25,
     },
 });
