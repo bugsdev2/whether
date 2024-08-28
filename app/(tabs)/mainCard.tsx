@@ -1,14 +1,25 @@
 import { View, Text, StyleSheet, Image } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Colors } from '@/constants/Colors';
 import { useFonts } from 'expo-font';
 import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
-import { getData } from '@/helpers/storage';
+import { useGetWeatherData } from '@/hooks/useGetWeatherData';
+import { LatLonProvider } from '@/app/index';
+import wcodes from '@/constants/weatherCodes';
+import { processWeatherCode } from '@/helpers/weatherCodeProcessor';
 
 const MainCard = () => {
+    const { latLonData, setLatLonData } = useContext(LatLonProvider);
+    const weatherCodes = wcodes;
+
     const [fontsLoaded] = useFonts({
         fontPort: PortLligatSlab_400Regular,
     });
+
+    const [weatherData, error] = useGetWeatherData(latLonData.name, latLonData.lat!, latLonData.lon!);
+
+    let timeOfDay: 'day' | 'night' = weatherData.current?.is_day ? 'day' : 'night';
+    const weatherCondition = processWeatherCode(weatherData.current?.weather_code!, timeOfDay);
 
     if (!fontsLoaded) {
         return (
@@ -19,14 +30,23 @@ const MainCard = () => {
     } else {
         return (
             <View style={styles.container}>
-                <Text style={[styles.text, styles.location]}>Delhi</Text>
+                <Text style={[styles.text, styles.location]}>
+                    {latLonData.name}
+                    {', ' + latLonData.country}
+                </Text>
                 {/* <View style={styles.hr}></View> */}
                 <View style={styles.card}>
-                    <Text style={[styles.text, styles.temperature]}>25 C</Text>
-                    <Text style={[styles.text, styles.appTemperature]}>Feels like 27 C</Text>
+                    <Text style={[styles.text, styles.temperature]}>
+                        {weatherData.current?.temperature_2m}
+                        {weatherData.current_units?.temperature_2m}
+                    </Text>
+                    <Text style={[styles.text, styles.appTemperature]}>
+                        {weatherData.current?.apparent_temperature ? 'Feels Like' : null} {weatherData.current?.apparent_temperature}
+                        {weatherData.current_units?.temperature_2m}
+                    </Text>
 
-                    <Image style={styles.image} source={require('@/assets/images/weather-icons/heavy-rain.png')} />
-                    <Text style={[styles.text, styles.weatherDescription]}>Heavy Rain</Text>
+                    <Image style={styles.image} source={weatherCondition?.image} />
+                    <Text style={[styles.text, styles.weatherDescription]}>{weatherCondition?.description}</Text>
                 </View>
                 {/* <View style={styles.hr}></View> */}
             </View>
@@ -34,7 +54,7 @@ const MainCard = () => {
     }
 };
 
-export default MainCard;
+export default React.memo(MainCard);
 
 const styles = StyleSheet.create({
     container: {

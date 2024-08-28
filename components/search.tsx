@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet, TextInput, View, Text, Pressable } from 'react-native';
-import React, { useState, useContext, useLayoutEffect } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { Colors } from '@/constants/Colors';
 import { LocationContext } from '@/app/index';
 import { LatLonProvider } from '@/app/index';
@@ -13,8 +13,8 @@ const Search = (props: { iconDisplay: () => void }) => {
         setSearchQuery(query);
     }
 
-    function handleLocationSelection(name: string, lat: number, lon: number) {
-        setLatLonData({ name, lat, lon });
+    function handleLocationSelection(name: string, lat: number, lon: number, admin1: string, country: string) {
+        setLatLonData({ name, lat, lon, admin1, country });
         props.iconDisplay();
     }
 
@@ -30,7 +30,7 @@ const Search = (props: { iconDisplay: () => void }) => {
                 renderItem={({ item }) => {
                     return (
                         <View style={styles.searchSuggestions}>
-                            <Pressable onPress={() => handleLocationSelection(item.name, item.latitude, item.longitude)}>
+                            <Pressable onPress={() => handleLocationSelection(item.name, item.latitude, item.longitude, item.admin1, item.country)}>
                                 <Text>
                                     {item.name}
                                     {item.admin1 && ', ' + item.admin1 + ','} {item.country}
@@ -46,7 +46,7 @@ const Search = (props: { iconDisplay: () => void }) => {
     );
 };
 
-export default Search;
+export default React.memo(Search);
 
 const styles = StyleSheet.create({
     inputContainer: {
