@@ -1,18 +1,16 @@
 import { FlatList, StyleSheet, TextInput, View, Text, Pressable } from 'react-native';
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Colors } from '@/constants/Colors';
 import { LocationContext } from '@/app/index';
 import { LatLonProvider } from '@/app/index';
 import { useGetLanLon } from '@/hooks/useGetLatLon';
-import { getData, setData } from '@/helpers/storage';
-import { LatLonData } from '@/interfaces/latLonData';
+import { setData } from '@/helpers/storage';
 
 const Search = (props: { iconDisplay: () => void }) => {
     const { latLonData, setLatLonData } = useContext(LatLonProvider);
     const { searchQuery, setSearchQuery } = useContext(LocationContext);
 
     function handleLocationSelection(name: string, lat: number, lon: number, admin1: string, country: string) {
-        setData('latLonData', JSON.stringify({ name, lat, lon, admin1, country }));
         setLatLonData({ name, lat, lon, admin1, country });
         props.iconDisplay();
     }
@@ -46,7 +44,7 @@ const Search = (props: { iconDisplay: () => void }) => {
     );
 };
 
-export default Search;
+export default React.memo(Search);
 
 const styles = StyleSheet.create({
     inputContainer: {

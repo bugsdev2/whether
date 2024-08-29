@@ -1,32 +1,28 @@
 import { View, Text, StyleSheet, Image } from 'react-native';
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Colors } from '@/constants/Colors';
 import { useFonts } from 'expo-font';
 import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
 import { useGetWeatherData } from '@/hooks/useGetWeatherData';
 import { LatLonProvider } from '@/app/index';
-import wcodes from '@/constants/weatherCodes';
 import { processWeatherCode } from '@/helpers/weatherCodeProcessor';
-import { getData } from '@/helpers/storage';
-import { LatLonData } from '@/interfaces/latLonData';
+// import { setData, getData } from '@/helpers/storage';
 
 const MainCard = () => {
     const { latLonData, setLatLonData } = useContext(LatLonProvider);
-    const weatherCodes = wcodes;
 
     const [fontsLoaded] = useFonts({
         fontPort: PortLligatSlab_400Regular,
     });
 
-    // const [latLonData, setLatLonData] = useState<LatLonData>({ name: '', lat: 0, lon: 0, admin1: '', country: '' });
-
-    useMemo(() => {
-        getData('latLonData').then((data) => {
-            if (data) {
-                setLatLonData(data);
-            }
-        });
-    }, [latLonData]);
+    // useEffect(() => {
+    //     getData('latLonData').then((data) => {
+    //         if (data?.name !== '') {
+    //             setLatLonData(data!);
+    //         }
+    //     });
+    //     setData('latLonData', JSON.stringify(latLonData));
+    // }, [latLonData]);
 
     let [weatherData, error] = useGetWeatherData(latLonData?.name, latLonData?.lat!, latLonData?.lon!);
 
@@ -35,8 +31,8 @@ const MainCard = () => {
 
     if (!fontsLoaded) {
         return (
-            <View>
-                <Text>Loading...</Text>
+            <View style={styles.container}>
+                <Text style={{ color: 'white' }}>Loading...</Text>
             </View>
         );
     } else {
@@ -66,11 +62,10 @@ const MainCard = () => {
     }
 };
 
-export default MainCard;
+export default React.memo(MainCard);
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: 'center',
         zIndex: -10,
     },

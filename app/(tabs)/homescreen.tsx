@@ -1,15 +1,12 @@
 import { StyleSheet, Pressable, View } from 'react-native';
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Colors } from '@/constants/Colors';
-import MainCard from '@/app/(tabs)/mainCard';
+import MainCard from '@/components/mainCard';
 import Search from '@/components/search';
 import { Feather } from '@expo/vector-icons';
-import { LatLonProvider } from '@/app/index';
-import { useGetWeatherData } from '@/hooks/useGetWeatherData';
+import DailyCards from '@/components/dailyCards';
 
 const HomeScreen = () => {
-    const { latLonData, setLatLonData } = useContext(LatLonProvider);
-
     const [searchIconDisplay, setSearchIconDisplay] = useState(true);
 
     function handleIconDisplay() {
@@ -23,6 +20,9 @@ const HomeScreen = () => {
             </Pressable>
             {searchIconDisplay ? null : <Search iconDisplay={() => handleIconDisplay()} />}
             <MainCard />
+            <View>
+                <DailyCards />
+            </View>
         </View>
     );
 };
