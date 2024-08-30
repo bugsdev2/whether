@@ -1,6 +1,6 @@
 import weatherCodes from '@/constants/weatherCodes';
 
-export function processWeatherCode(code: number, timeOfDay: string) {
+export function processWeatherCode(code: number, timeOfDay: string = 'day') {
     for (let key in weatherCodes) {
         if (code == undefined) return;
 
