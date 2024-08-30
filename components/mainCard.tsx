@@ -6,7 +6,7 @@ import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
 import { useGetWeatherData } from '@/hooks/useGetWeatherData';
 import { LatLonProvider } from '@/app/index';
 import { processWeatherCode } from '@/helpers/weatherCodeProcessor';
-// import { setData, getData } from '@/helpers/storage';
+import { setData, getData } from '@/helpers/storage';
 
 const MainCard = () => {
     const { latLonData, setLatLonData } = useContext(LatLonProvider);
@@ -15,14 +15,13 @@ const MainCard = () => {
         fontPort: PortLligatSlab_400Regular,
     });
 
-    // useEffect(() => {
-    //     getData('latLonData').then((data) => {
-    //         if (data?.name !== '') {
-    //             setLatLonData(data!);
-    //         }
-    //     });
-    //     setData('latLonData', JSON.stringify(latLonData));
-    // }, [latLonData]);
+    useEffect(() => {
+        getData('latLonData').then((data) => {
+            if (data) {
+                setLatLonData(data);
+            }
+        });
+    }, []);
 
     let [weatherData, error] = useGetWeatherData(latLonData?.name, latLonData?.lat!, latLonData?.lon!);
 

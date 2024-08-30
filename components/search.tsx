@@ -12,6 +12,7 @@ const Search = (props: { iconDisplay: () => void }) => {
 
     function handleLocationSelection(name: string, lat: number, lon: number, admin1: string, country: string) {
         setLatLonData({ name, lat, lon, admin1, country });
+        setData('latLonData', { name, lat, lon, admin1, country });
         Keyboard.dismiss();
         props.iconDisplay();
     }
