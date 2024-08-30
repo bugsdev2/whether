@@ -19,11 +19,12 @@ const Search = (props: { iconDisplay: () => void }) => {
     const data = useGetLanLon(searchQuery);
 
     return (
-        <SafeAreaView>
+        <View>
             <View style={styles.inputContainer}>
                 <TextInput style={styles.input} value={searchQuery} placeholder="enter the location here" placeholderTextColor={Colors.darkMode.light} onChangeText={(query) => setSearchQuery(query)} />
             </View>
             <FlatList
+                keyboardShouldPersistTaps="handled"
                 style={styles.flatListView}
                 data={data}
                 renderItem={({ item }) => {
@@ -41,7 +42,7 @@ const Search = (props: { iconDisplay: () => void }) => {
                 keyExtractor={(item) => item.id.toString()}
                 ListEmptyComponent={<View style={{ display: 'none' }}></View>}
             />
-        </SafeAreaView>
+        </View>
     );
 };
 
