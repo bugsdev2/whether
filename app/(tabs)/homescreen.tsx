@@ -15,12 +15,14 @@ const HomeScreen = () => {
 
     return (
         <View style={styles.container}>
-            <Pressable onPress={() => setSearchIconDisplay(false)}>
+            <Pressable style={styles.searchIconContainer} onPress={() => setSearchIconDisplay(false)}>
                 <Feather name="search" style={[!searchIconDisplay && { display: 'none' }, styles.searchIcon]} />
             </Pressable>
             {searchIconDisplay ? null : <Search iconDisplay={() => handleIconDisplay()} />}
-            <MainCard />
-            <View>
+            <View style={styles.mainCardContainer}>
+                <MainCard />
+            </View>
+            <View style={styles.dailyCardsContainer}>
                 <DailyCards />
             </View>
         </View>
@@ -34,6 +36,22 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.darkMode.bgGradientDark,
         padding: 10,
+    },
+
+    searchIconContainer: {
+        position: 'absolute',
+        zIndex: 50,
+        right: 10,
+        top: 15,
+    },
+
+    mainCardContainer: {
+        marginTop: 35,
+        zIndex: -10,
+    },
+
+    dailyCardsContainer: {
+        marginTop: 35,
     },
 
     searchIcon: {

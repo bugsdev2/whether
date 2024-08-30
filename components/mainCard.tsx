@@ -42,7 +42,7 @@ const MainCard = () => {
                     {latLonData?.name}
                     {latLonData?.country ? ', ' + latLonData.country : null}
                 </Text>
-                {/* <View style={styles.hr}></View> */}
+                <View style={styles.hr}></View>
                 <View style={styles.card}>
                     <Text style={[styles.text, styles.temperature]}>
                         {weatherData.current?.temperature_2m}
@@ -56,7 +56,7 @@ const MainCard = () => {
                     <Image style={styles.image} source={weatherCondition?.image} />
                     <Text style={[styles.text, styles.weatherDescription]}>{weatherCondition?.description}</Text>
                 </View>
-                {/* <View style={styles.hr}></View> */}
+                <View style={styles.hr}></View>
             </View>
         );
     }

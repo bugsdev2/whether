@@ -1,5 +1,5 @@
-import { FlatList, StyleSheet, TextInput, View, Text, Pressable } from 'react-native';
-import React, { useContext, useEffect } from 'react';
+import { FlatList, StyleSheet, TextInput, View, Text, Pressable, SafeAreaView, Keyboard } from 'react-native';
+import React, { useContext } from 'react';
 import { Colors } from '@/constants/Colors';
 import { LocationContext } from '@/app/index';
 import { LatLonProvider } from '@/app/index';
@@ -12,13 +12,14 @@ const Search = (props: { iconDisplay: () => void }) => {
 
     function handleLocationSelection(name: string, lat: number, lon: number, admin1: string, country: string) {
         setLatLonData({ name, lat, lon, admin1, country });
+        Keyboard.dismiss();
         props.iconDisplay();
     }
 
     const data = useGetLanLon(searchQuery);
 
     return (
-        <View>
+        <SafeAreaView>
             <View style={styles.inputContainer}>
                 <TextInput style={styles.input} value={searchQuery} placeholder="enter the location here" placeholderTextColor={Colors.darkMode.light} onChangeText={(query) => setSearchQuery(query)} />
             </View>
@@ -40,7 +41,7 @@ const Search = (props: { iconDisplay: () => void }) => {
                 keyExtractor={(item) => item.id.toString()}
                 ListEmptyComponent={<View style={{ display: 'none' }}></View>}
             />
-        </View>
+        </SafeAreaView>
     );
 };
 
