@@ -1,13 +1,33 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import { FlatList, ScrollView, StyleSheet, Text, View, Image } from 'react-native';
+import React, { useContext } from 'react';
 import { Colors } from '@/constants/Colors';
 import { useFonts } from 'expo-font';
 import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
+import { useGetWeatherData } from '@/hooks/useGetWeatherData';
+import { LatLonProvider } from '@/app/index';
+import { getProcessedDailyData } from '@/helpers/processDailyWeatherData';
+import { processWeatherCode } from '@/helpers/weatherCodeProcessor';
 
 const DailyCards = () => {
     const [fontsLoaded] = useFonts({
         fontPort: PortLligatSlab_400Regular,
     });
+
+    const { latLonData, setLatLonData } = useContext(LatLonProvider);
+
+    const [weatherData, error] = useGetWeatherData(latLonData?.name, latLonData?.lat!, latLonData?.lon!);
+
+    const data = getProcessedDailyData(weatherData.daily);
+
+    function handleWeatherCondition(code: number) {
+        const weatherCondition = processWeatherCode(code);
+        return (
+            <View style={{ alignItems: 'center' }}>
+                <Image style={styles.image} source={weatherCondition?.image} />
+                <Text style={[styles.text, styles.weatherDescription]}>{weatherCondition?.description}</Text>
+            </View>
+        );
+    }
 
     if (!fontsLoaded) {
         return (
@@ -18,16 +38,32 @@ const DailyCards = () => {
     } else {
         return (
             <ScrollView>
-                <View style={styles.container}>
-                    <View style={styles.boxContainer}>
-                        <Text style={[styles.text]}>DailyCards</Text>
-                    </View>
-                    <View style={styles.boxContainer}>
-                        <Text style={[styles.text]}>DailyCards</Text>
-                    </View>
-                    <View style={styles.boxContainer}>
-                        <Text style={[styles.text]}>DailyCards</Text>
-                    </View>
+                <View>
+                    <FlatList
+                        data={data}
+                        renderItem={({ item }) => {
+                            return (
+                                <View style={styles.container}>
+                                    <Text style={[styles.date, styles.text]}>{item!.time.split('-').reverse().join('/')}</Text>
+                                    <View style={styles.boxContainer}>
+                                        <Text style={[styles.text, styles.temp]}>
+                                            {'Max: '}
+                                            {item!.temperature_2m_max}
+                                            {'°C'}
+                                        </Text>
+                                        <Text style={[styles.text, styles.temp]}>
+                                            {'Min: '}
+                                            {item!.temperature_2m_min}
+                                            {'°C'}
+                                        </Text>
+                                        {handleWeatherCondition(item.weather_code)}
+                                    </View>
+                                </View>
+                            );
+                        }}
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                    />
                 </View>
             </ScrollView>
         );
@@ -38,19 +74,41 @@ export default DailyCards;
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        gap: 10,
         alignItems: 'center',
     },
 
     text: {
         color: Colors.darkMode.light,
-        fontFamily: 'portFont',
+        fontFamily: 'fontPort',
+    },
+
+    date: {
+        fontSize: 20,
     },
 
     boxContainer: {
+        minWidth: 200,
         padding: 15,
         borderWidth: 1,
+        borderColor: Colors.darkMode.gray,
         alignItems: 'center',
+        marginHorizontal: 15,
+        marginTop: 5,
+        borderRadius: 20,
+        backgroundColor: Colors.darkMode.bgGradientLight,
+    },
+
+    image: {
+        marginVertical: 10,
+        width: 100,
+        height: 100,
+    },
+
+    temp: {
+        fontSize: 18,
+    },
+
+    weatherDescription: {
+        fontSize: 20,
     },
 });
