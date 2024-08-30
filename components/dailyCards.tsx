@@ -82,13 +82,13 @@ const styles = StyleSheet.create({
     boxContainer: {
         minWidth: 200,
         padding: 15,
-        borderWidth: 1,
+        // borderWidth: 1,
         borderColor: Colors.darkMode.gray,
         alignItems: 'center',
         marginHorizontal: 15,
         marginTop: 5,
         borderRadius: 20,
-        backgroundColor: Colors.darkMode.bgGradientLight,
+        backgroundColor: Colors.darkMode.richblack,
     },
 
     image: {

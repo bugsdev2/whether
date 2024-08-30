@@ -6,7 +6,7 @@ import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
 import { useGetWeatherData } from '@/hooks/useGetWeatherData';
 import { LatLonProvider } from '@/app/index';
 import { processWeatherCode } from '@/helpers/weatherCodeProcessor';
-import { setData, getData } from '@/helpers/storage';
+import { getData } from '@/helpers/storage';
 
 const MainCard = () => {
     const { latLonData, setLatLonData } = useContext(LatLonProvider);
@@ -66,13 +66,14 @@ export default React.memo(MainCard);
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        zIndex: -10,
+        zIndex: 5,
     },
 
     hr: {
-        marginVertical: 5,
+        marginVertical: 10,
         height: 2,
         width: '90%',
+        opacity: 1,
         backgroundColor: Colors.darkMode.gray,
     },
 
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center',
         borderRadius: 30,
-        backgroundColor: Colors.darkMode.gray,
+        backgroundColor: Colors.darkMode.richblack,
         padding: 15,
     },
 

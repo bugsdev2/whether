@@ -55,12 +55,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: 15,
-        zIndex: 50,
     },
 
     input: {
         borderWidth: 1,
-        backgroundColor: Colors.darkMode.bgGradientDark,
+        backgroundColor: Colors.darkMode.richblack,
         flex: 1,
         borderColor: Colors.darkMode.gray,
         borderRadius: 30,
@@ -93,7 +92,7 @@ const styles = StyleSheet.create({
     },
 
     searchSuggestions: {
-        backgroundColor: Colors.darkMode.bgGradientLight,
+        backgroundColor: Colors.darkMode.black,
         paddingVertical: 10,
         paddingHorizontal: 10,
     },

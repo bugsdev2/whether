@@ -18,7 +18,7 @@ const HomeScreen = () => {
             <Pressable style={styles.searchIconContainer} onPress={() => setSearchIconDisplay(false)}>
                 <Feather name="search" style={[!searchIconDisplay && { display: 'none' }, styles.searchIcon]} />
             </Pressable>
-            {searchIconDisplay ? null : <Search iconDisplay={() => handleIconDisplay()} />}
+            <View style={styles.searchInputContainer}>{searchIconDisplay ? null : <Search iconDisplay={() => handleIconDisplay()} />}</View>
             <View style={styles.mainCardContainer}>
                 <MainCard />
             </View>
@@ -34,29 +34,31 @@ export default React.memo(HomeScreen);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.darkMode.bgGradientDark,
+        // backgroundColor: Colors.darkMode.bgGradientDark,
         padding: 10,
-    },
-
-    searchIconContainer: {
-        position: 'absolute',
-        zIndex: 50,
-        right: 10,
-        top: 15,
-    },
-
-    mainCardContainer: {
-        marginTop: 35,
-        zIndex: -10,
-    },
-
-    dailyCardsContainer: {
-        marginTop: 35,
     },
 
     searchIcon: {
         fontSize: 25,
         color: Colors.darkMode.light,
         textAlign: 'right',
+    },
+
+    searchIconContainer: {
+        position: 'absolute',
+        right: 10,
+        top: 15,
+    },
+
+    searchInputContainer: {
+        zIndex: 5,
+    },
+
+    mainCardContainer: {
+        marginTop: 35,
+    },
+
+    dailyCardsContainer: {
+        marginVertical: 35,
     },
 });
