@@ -41,6 +41,7 @@ const DailyCards = () => {
                 <View>
                     <FlatList
                         data={data}
+                        keyExtractor={(item, index) => index.toString()}
                         renderItem={({ item }) => {
                             return (
                                 <View style={styles.container}>
