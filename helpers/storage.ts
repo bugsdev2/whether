@@ -1,9 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LatLonData } from '@/interfaces/latLonData';
 
-export const setData = (key: string, value: string) => {
+export const setData = async (key: string, value: {}) => {
     try {
-        AsyncStorage.setItem(key, value);
+        await AsyncStorage.setItem(key, JSON.stringify(value));
     } catch (err) {
         console.log('Error storing data: ', err);
     }
@@ -12,13 +12,8 @@ export const setData = (key: string, value: string) => {
 export const getData = async (key: string): Promise<LatLonData | undefined> => {
     try {
         const value = await AsyncStorage.getItem(key);
-        if (!value) {
-            let err = 'Error: Not found';
-            throw err;
-        }
         if (value !== null) {
-            const data = await value;
-            return JSON.parse(data);
+            return JSON.parse(value);
         }
     } catch (err: any) {
         console.log('Error retrieving data: ', err);
