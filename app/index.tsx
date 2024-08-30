@@ -1,5 +1,5 @@
 import React, { useState, createContext } from 'react';
-import HomeScreen from './(tabs)/homescreen';
+import HomeScreen from '@/app/(tabs)/homescreen';
 import { LatLonData } from '@/interfaces/latLonData';
 
 export const LocationContext = createContext<{ searchQuery: string; setSearchQuery: React.Dispatch<React.SetStateAction<string>> }>({ searchQuery: '', setSearchQuery: () => {} });

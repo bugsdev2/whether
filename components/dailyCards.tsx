@@ -1,4 +1,4 @@
-import { FlatList, ScrollView, StyleSheet, Text, View, Image } from 'react-native';
+import { FlatList, StyleSheet, Text, View, Image } from 'react-native';
 import React, { useContext } from 'react';
 import { Colors } from '@/constants/Colors';
 import { useFonts } from 'expo-font';
@@ -30,43 +30,35 @@ const DailyCards = () => {
     }
 
     if (!fontsLoaded) {
-        return (
-            <View style={styles.container}>
-                <Text>Loading...</Text>
-            </View>
-        );
+        return <Text>Loading...</Text>;
     } else {
         return (
-            <ScrollView>
-                <View>
-                    <FlatList
-                        data={data}
-                        keyExtractor={(item, index) => index.toString()}
-                        renderItem={({ item }) => {
-                            return (
-                                <View style={styles.container}>
-                                    <Text style={[styles.date, styles.text]}>{item!.time.split('-').reverse().join('/')}</Text>
-                                    <View style={styles.boxContainer}>
-                                        <Text style={[styles.text, styles.temp]}>
-                                            {'Max: '}
-                                            {item!.temperature_2m_max}
-                                            {'°C'}
-                                        </Text>
-                                        <Text style={[styles.text, styles.temp]}>
-                                            {'Min: '}
-                                            {item!.temperature_2m_min}
-                                            {'°C'}
-                                        </Text>
-                                        {handleWeatherCondition(item.weather_code)}
-                                    </View>
-                                </View>
-                            );
-                        }}
-                        horizontal
-                        showsHorizontalScrollIndicator={false}
-                    />
-                </View>
-            </ScrollView>
+            <FlatList
+                data={data}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => {
+                    return (
+                        <View style={styles.container}>
+                            <Text style={[styles.date, styles.text]}>{item!.time.split('-').reverse().join('/')}</Text>
+                            <View style={styles.boxContainer}>
+                                <Text style={[styles.text, styles.temp]}>
+                                    {'Max: '}
+                                    {item!.temperature_2m_max}
+                                    {'°C'}
+                                </Text>
+                                <Text style={[styles.text, styles.temp]}>
+                                    {'Min: '}
+                                    {item!.temperature_2m_min}
+                                    {'°C'}
+                                </Text>
+                                {handleWeatherCondition(item.weather_code)}
+                            </View>
+                        </View>
+                    );
+                }}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+            />
         );
     }
 };
@@ -110,6 +102,6 @@ const styles = StyleSheet.create({
     },
 
     weatherDescription: {
-        fontSize: 20,
+        fontSize: 22,
     },
 });
