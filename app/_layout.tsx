@@ -5,7 +5,7 @@ import { Dimensions, ImageBackground, StyleSheet, View } from 'react-native';
 export default function layout() {
     return (
         <View style={styles.container}>
-            <ImageBackground style={[styles.imageBg]} resizeMode="cover" source={require('@/assets/images/sunnybg2.jpg')}>
+            <ImageBackground style={[styles.imageBg]} resizeMode="cover" source={require('@/assets/images/bluesky.png')}>
                 <StatusBar hidden />
                 <Slot initialRouteName="index.tsx" />
             </ImageBackground>
