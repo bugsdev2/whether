@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     },
 
     searchInputContainer: {
-        zIndex: 5,
+        zIndex: 10,
     },
 
     mainCardContainer: {

@@ -5,11 +5,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Sunny',
             image: require('@/assets/images/weather-icons/sunny.png'),
+            image2: require('@/assets/images/weather-icons2/sunny.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/sunny.png',
         },
         night: {
             description: 'Clear',
             image: require('@/assets/images/weather-icons/moony.png'),
+            image2: require('@/assets/images/weather-icons2/moony.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/moony.png',
         },
     },
@@ -17,11 +19,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Mainly Sunny',
             image: require('@/assets/images/weather-icons/sunny.png'),
+            image2: require('@/assets/images/weather-icons2/sunny.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/sunny.png',
         },
         night: {
             description: 'Mainly Clear',
             image: require('@/assets/images/weather-icons/moony.png'),
+            image2: require('@/assets/images/weather-icons2/moony.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/moony.png',
         },
     },
@@ -29,11 +33,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Partly Cloudy',
             image: require('@/assets/images/weather-icons/partly-cloudy.png'),
+            image2: require('@/assets/images/weather-icons2/cloudy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/partly-cloudy.png',
         },
         night: {
             description: 'Partly Cloudy',
             image: require('@/assets/images/weather-icons/partly-cloudy2.png'),
+            image2: require('@/assets/images/weather-icons2/cloudy-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/partly-cloudy2.png',
         },
     },
@@ -41,11 +47,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Cloudy',
             image: require('@/assets/images/weather-icons/cloudy2.png'),
+            image2: require('@/assets/images/weather-icons2/cloudy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/cloudy2.png',
         },
         night: {
             description: 'Cloudy',
             image: require('@/assets/images/weather-icons/cloudy2.png'),
+            image2: require('@/assets/images/weather-icons2/cloudy-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/cloudy2.png',
         },
     },
@@ -53,11 +61,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Foggy',
             image: require('@/assets/images/weather-icons/foggy.png'),
+            image2: require('@/assets/images/weather-icons2/foggy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/foggy.png',
         },
         night: {
             description: 'Foggy',
             image: require('@/assets/images/weather-icons/foggy.png'),
+            image2: require('@/assets/images/weather-icons2/foggy-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/foggy.png',
         },
     },
@@ -65,11 +75,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Rime Fog',
             image: require('@/assets/images/weather-icons/foggy.png'),
+            image2: require('@/assets/images/weather-icons2/foggy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/foggy.png',
         },
         night: {
             description: 'Rime Fog',
             image: require('@/assets/images/weather-icons/foggy.png'),
+            image2: require('@/assets/images/weather-icons2/foggy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/foggy.png',
         },
     },
@@ -77,11 +89,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Light Drizzle',
             image: require('@/assets/images/weather-icons/drizzle.png'),
+            image2: require('@/assets/images/weather-icons2/drizzle-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/drizzle.png',
         },
         night: {
             description: 'Light Drizzle',
             image: require('@/assets/images/weather-icons/drizzle.png'),
+            image2: require('@/assets/images/weather-icons2/drizzle-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/drizzle.png',
         },
     },
@@ -89,11 +103,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Drizzle',
             image: require('@/assets/images/weather-icons/drizzle.png'),
+            image2: require('@/assets/images/weather-icons2/drizzle-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/drizzle.png',
         },
         night: {
             description: 'Drizzle',
             image: require('@/assets/images/weather-icons/drizzle.png'),
+            image2: require('@/assets/images/weather-icons2/drizzle-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/drizzle.png',
         },
     },
@@ -101,11 +117,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Heavy Drizzle',
             image: require('@/assets/images/weather-icons/drizzle.png'),
+            image2: require('@/assets/images/weather-icons2/drizzle-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/drizzle.png',
         },
         night: {
             description: 'Heavy Drizzle',
             image: require('@/assets/images/weather-icons/drizzle.png'),
+            image2: require('@/assets/images/weather-icons2/drizzle-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/drizzle.png',
         },
     },
@@ -113,11 +131,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Light Freezing Drizzle',
             image: require('@/assets/images/weather-icons/drizzle.png'),
+            image2: require('@/assets/images/weather-icons2/drizzle-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/drizzle.png',
         },
         night: {
             description: 'Light Freezing Drizzle',
             image: require('@/assets/images/weather-icons/drizzle.png'),
+            image2: require('@/assets/images/weather-icons2/drizzle-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/drizzle.png',
         },
     },
@@ -125,11 +145,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Freezing Drizzle',
             image: require('@/assets/images/weather-icons/drizzle.png'),
+            image2: require('@/assets/images/weather-icons2/drizzle-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/drizzle.png',
         },
         night: {
             description: 'Freezing Drizzle',
             image: require('@/assets/images/weather-icons/drizzle.png'),
+            image2: require('@/assets/images/weather-icons2/drizzle-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/drizzle.png',
         },
     },
@@ -137,11 +159,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Light Rain',
             image: require('@/assets/images/weather-icons/rain.png'),
+            image2: require('@/assets/images/weather-icons2/rainy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/rain.png',
         },
         night: {
             description: 'Light Rain',
             image: require('@/assets/images/weather-icons/rain.png'),
+            image2: require('@/assets/images/weather-icons2/rainy-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/rain.png',
         },
     },
@@ -149,11 +173,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Rain',
             image: require('@/assets/images/weather-icons/rain.png'),
+            image2: require('@/assets/images/weather-icons2/rainy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/rain.png',
         },
         night: {
             description: 'Rain',
             image: require('@/assets/images/weather-icons/rain.png'),
+            image2: require('@/assets/images/weather-icons2/rainy-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/rain.png',
         },
     },
@@ -161,11 +187,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Heavy Rain',
             image: require('@/assets/images/weather-icons/heavy-rain.png'),
+            image2: require('@/assets/images/weather-icons2/rainy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/heavy-rain.png',
         },
         night: {
             description: 'Heavy Rain',
             image: require('@/assets/images/weather-icons/heavy-rain.png'),
+            image2: require('@/assets/images/weather-icons2/rainy-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/heavy-rain.png',
         },
     },
@@ -173,11 +201,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Light Freezing Rain',
             image: require('@/assets/images/weather-icons/rain.png'),
+            image2: require('@/assets/images/weather-icons2/rainy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/rain.png',
         },
         night: {
             description: 'Light Freezing Rain',
             image: require('@/assets/images/weather-icons/rain.png'),
+            image2: require('@/assets/images/weather-icons2/rainy-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/rain.png',
         },
     },
@@ -185,11 +215,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Freezing Rain',
             image: require('@/assets/images/weather-icons/rain.png'),
+            image2: require('@/assets/images/weather-icons2/rainy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/rain.png',
         },
         night: {
             description: 'Freezing Rain',
             image: require('@/assets/images/weather-icons/rain.png'),
+            image2: require('@/assets/images/weather-icons2/rainy-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/rain.png',
         },
     },
@@ -197,11 +229,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Light Snow',
             image: require('@/assets/images/weather-icons/snow1.png'),
+            image2: require('@/assets/images/weather-icons2/snowy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/snow1.png',
         },
         night: {
             description: 'Light Snow',
             image: require('@/assets/images/weather-icons/snow1.png'),
+            image2: require('@/assets/images/weather-icons2/snowy-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/snow1.png',
         },
     },
@@ -209,11 +243,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Snow',
             image: require('@/assets/images/weather-icons/snow1.png'),
+            image2: require('@/assets/images/weather-icons2/snowy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/snow1.png',
         },
         night: {
             description: 'Snow',
             image: require('@/assets/images/weather-icons/snow1.png'),
+            image2: require('@/assets/images/weather-icons2/snowy-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/snow1.png',
         },
     },
@@ -221,11 +257,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Heavy Snow',
             image: require('@/assets/images/weather-icons/snow2.png'),
+            image2: require('@/assets/images/weather-icons2/snowy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/snow2.png',
         },
         night: {
             description: 'Heavy Snow',
             image: require('@/assets/images/weather-icons/snow2.png'),
+            image2: require('@/assets/images/weather-icons2/snowy-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/snow2.png',
         },
     },
@@ -233,11 +271,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Snow Grains',
             image: require('@/assets/images/weather-icons/cloud-snow.png'),
+            image2: require('@/assets/images/weather-icons2/snowy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/cloud-snow.png',
         },
         night: {
             description: 'Snow Grains',
             image: require('@/assets/images/weather-icons/cloud-snow.png'),
+            image2: require('@/assets/images/weather-icons2/snowy-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/cloud-snow.png',
         },
     },
@@ -245,11 +285,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Light Showers',
             image: require('@/assets/images/weather-icons/drizzle.png'),
+            image2: require('@/assets/images/weather-icons2/drizzle-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/drizzle.png',
         },
         night: {
             description: 'Light Showers',
             image: require('@/assets/images/weather-icons/drizzle.png'),
+            image2: require('@/assets/images/weather-icons2/drizzle-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/drizzle.png',
         },
     },
@@ -257,11 +299,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Showers',
             image: require('@/assets/images/weather-icons/rain.png'),
+            image2: require('@/assets/images/weather-icons2/rainy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/rain.png',
         },
         night: {
             description: 'Showers',
             image: require('@/assets/images/weather-icons/rain.png'),
+            image2: require('@/assets/images/weather-icons2/rainy-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/rain.png',
         },
     },
@@ -269,11 +313,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Heavy Showers',
             image: require('@/assets/images/weather-icons/heavy-rain.png'),
+            image2: require('@/assets/images/weather-icons2/rainy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/heavy-rain.png',
         },
         night: {
             description: 'Heavy Showers',
             image: require('@/assets/images/weather-icons/heavy-rain.png'),
+            image2: require('@/assets/images/weather-icons2/rainy-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/heavy-rain.png',
         },
     },
@@ -281,11 +327,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Light Snow Showers',
             image: require('@/assets/images/weather-icons/snow1.png'),
+            image2: require('@/assets/images/weather-icons2/snowy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/snow1.png',
         },
         night: {
             description: 'Light Snow Showers',
             image: require('@/assets/images/weather-icons/snow1.png'),
+            image2: require('@/assets/images/weather-icons2/snowy-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/snow1.png',
         },
     },
@@ -293,11 +341,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Snow Showers',
             image: require('@/assets/images/weather-icons/snow2.png'),
+            image2: require('@/assets/images/weather-icons2/snowy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/snow2.png',
         },
         night: {
             description: 'Snow Showers',
             image: require('@/assets/images/weather-icons/snow2.png'),
+            image2: require('@/assets/images/weather-icons2/snowy-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/snow2.png',
         },
     },
@@ -305,11 +355,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Thunderstorm',
             image: require('@/assets/images/weather-icons/lightning-rain.png'),
+            image2: require('@/assets/images/weather-icons2/thunderstorm-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/lightning-rain.png',
         },
         night: {
             description: 'Thunderstorm',
             image: require('@/assets/images/weather-icons/lightning-rain.png'),
+            image2: require('@/assets/images/weather-icons2/thunderstorm-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/lightning-rain.png',
         },
     },
@@ -317,11 +369,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Light Thunderstorms With Hail',
             image: require('@/assets/images/weather-icons/lightning-rain.png'),
+            image2: require('@/assets/images/weather-icons2/thunderstorm-hail-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/lightning-rain.png',
         },
         night: {
             description: 'Light Thunderstorms With Hail',
             image: require('@/assets/images/weather-icons/lightning-rain.png'),
+            image2: require('@/assets/images/weather-icons2/thunderstorm-hail-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/lightning-rain.png',
         },
     },
@@ -329,11 +383,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Thunderstorm With Hail',
             image: require('@/assets/images/weather-icons/lightning-rain.png'),
+            image2: require('@/assets/images/weather-icons2/thunderstorm-hail-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/lightning-rain.png',
         },
         night: {
             description: 'Thunderstorm With Hail',
             image: require('@/assets/images/weather-icons/lightning-rain.png'),
+            image2: require('@/assets/images/weather-icons2/thunderstorm-hail-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/lightning-rain.png',
         },
     },

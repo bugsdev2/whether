@@ -32,7 +32,7 @@ const Search = (props: { iconDisplay: () => void }) => {
                     return (
                         <View style={styles.searchSuggestions}>
                             <Pressable onPress={() => handleLocationSelection(item.name, item.latitude, item.longitude, item.admin1, item.country)}>
-                                <Text style={{ color: 'white' }}>
+                                <Text style={styles.text}>
                                     {item.name}
                                     {item.admin1 && ', ' + item.admin1 + ','} {item.country}
                                 </Text>
@@ -55,6 +55,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: 15,
+    },
+
+    text: {
+        color: 'black',
     },
 
     input: {
@@ -92,7 +96,7 @@ const styles = StyleSheet.create({
     },
 
     searchSuggestions: {
-        backgroundColor: Colors.darkMode.black,
+        backgroundColor: Colors.darkMode.light,
         paddingVertical: 10,
         paddingHorizontal: 10,
     },
