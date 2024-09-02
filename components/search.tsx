@@ -22,7 +22,7 @@ const Search = (props: { iconDisplay: () => void }) => {
     return (
         <View>
             <View style={styles.inputContainer}>
-                <TextInput style={styles.input} value={searchQuery} placeholder="enter the location here" placeholderTextColor={Colors.darkMode.light} onChangeText={(query) => setSearchQuery(query)} />
+                <TextInput style={styles.input} autoFocus value={searchQuery} placeholder="enter the location here" placeholderTextColor={Colors.darkMode.light} onChangeText={(query) => setSearchQuery(query)} />
             </View>
             <FlatList
                 keyboardShouldPersistTaps="handled"
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         backgroundColor: Colors.darkMode.richblack,
         flex: 1,
-        borderColor: Colors.darkMode.gray,
+        borderColor: Colors.darkMode.light,
         borderRadius: 30,
         paddingHorizontal: 15,
         paddingVertical: 2,
