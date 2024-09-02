@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { Slot } from 'expo-router';
-import { ImageBackground, StyleSheet, View } from 'react-native';
+import { Dimensions, ImageBackground, StyleSheet, View } from 'react-native';
+
 export default function layout() {
     return (
         <View style={styles.container}>
-            <ImageBackground style={[styles.container, styles.imageBg]} resizeMode="stretch" source={require('@/assets/images/weatherbg1.jpg')}>
+            <ImageBackground style={[styles.imageBg]} resizeMode="cover" source={require('@/assets/images/bluesky.png')}>
                 <StatusBar hidden />
                 <Slot initialRouteName="index.tsx" />
             </ImageBackground>
@@ -14,11 +15,12 @@ export default function layout() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         zIndex: -50,
     },
 
     imageBg: {
         zIndex: -40,
+        height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width,
     },
 });

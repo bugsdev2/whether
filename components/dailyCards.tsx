@@ -23,7 +23,7 @@ const DailyCards = () => {
         const weatherCondition = processWeatherCode(code);
         return (
             <View style={{ alignItems: 'center' }}>
-                <Image style={styles.image} source={weatherCondition?.image} />
+                <Image style={styles.image} source={weatherCondition?.image2} />
                 <Text style={[styles.text, styles.weatherDescription]}>{weatherCondition?.description}</Text>
             </View>
         );
@@ -92,9 +92,8 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        marginVertical: 10,
-        width: 100,
-        height: 100,
+        width: 120,
+        height: 120,
     },
 
     temp: {

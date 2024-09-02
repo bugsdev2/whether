@@ -22,7 +22,7 @@ const Search = (props: { iconDisplay: () => void }) => {
     return (
         <View>
             <View style={styles.inputContainer}>
-                <TextInput style={styles.input} value={searchQuery} placeholder="enter the location here" placeholderTextColor={Colors.darkMode.light} onChangeText={(query) => setSearchQuery(query)} />
+                <TextInput style={styles.input} autoFocus value={searchQuery} placeholder="enter the location here" placeholderTextColor={Colors.darkMode.light} onChangeText={(query) => setSearchQuery(query)} />
             </View>
             <FlatList
                 keyboardShouldPersistTaps="handled"
@@ -32,7 +32,7 @@ const Search = (props: { iconDisplay: () => void }) => {
                     return (
                         <View style={styles.searchSuggestions}>
                             <Pressable onPress={() => handleLocationSelection(item.name, item.latitude, item.longitude, item.admin1, item.country)}>
-                                <Text style={{ color: 'white' }}>
+                                <Text style={styles.text}>
                                     {item.name}
                                     {item.admin1 && ', ' + item.admin1 + ','} {item.country}
                                 </Text>
@@ -57,11 +57,15 @@ const styles = StyleSheet.create({
         gap: 15,
     },
 
+    text: {
+        color: 'black',
+    },
+
     input: {
         borderWidth: 1,
         backgroundColor: Colors.darkMode.richblack,
         flex: 1,
-        borderColor: Colors.darkMode.gray,
+        borderColor: Colors.darkMode.light,
         borderRadius: 30,
         paddingHorizontal: 15,
         paddingVertical: 2,
@@ -92,7 +96,7 @@ const styles = StyleSheet.create({
     },
 
     searchSuggestions: {
-        backgroundColor: Colors.darkMode.black,
+        backgroundColor: Colors.darkMode.light,
         paddingVertical: 10,
         paddingHorizontal: 10,
     },

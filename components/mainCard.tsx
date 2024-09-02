@@ -6,7 +6,7 @@ import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
 import { useGetWeatherData } from '@/hooks/useGetWeatherData';
 import { LatLonProvider } from '@/app/index';
 import { processWeatherCode } from '@/helpers/weatherCodeProcessor';
-import { getData } from '@/helpers/storage';
+import { getData, setData } from '@/helpers/storage';
 
 const MainCard = () => {
     const { latLonData, setLatLonData } = useContext(LatLonProvider);
@@ -27,6 +27,10 @@ const MainCard = () => {
 
     let timeOfDay: 'day' | 'night' = weatherData!.current?.is_day ? 'day' : 'night';
     const weatherCondition = processWeatherCode(weatherData!.current?.weather_code!, timeOfDay);
+
+    useEffect(() => {
+        setData('weather', { weather: weatherCondition?.description });
+    }, [weatherCondition?.description]);
 
     if (!fontsLoaded) {
         return (
@@ -52,7 +56,7 @@ const MainCard = () => {
                         {weatherData.current_units?.temperature_2m}
                     </Text>
 
-                    <Image style={styles.image} source={weatherCondition?.image} />
+                    <Image style={styles.image} source={weatherCondition?.image2} />
                     <Text style={[styles.text, styles.weatherDescription]}>{weatherCondition?.description}</Text>
                 </View>
                 <View style={styles.hr}></View>
@@ -73,8 +77,8 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         height: 2,
         width: '90%',
-        opacity: 1,
-        backgroundColor: Colors.darkMode.gray,
+        opacity: 0.4,
+        backgroundColor: Colors.darkMode.light,
     },
 
     card: {
@@ -108,9 +112,8 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        marginVertical: 15,
-        width: 150,
-        height: 150,
+        width: 170,
+        height: 170,
     },
 
     weatherDescription: {
