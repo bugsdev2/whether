@@ -13,11 +13,11 @@ const DailyCards = () => {
         fontPort: PortLligatSlab_400Regular,
     });
 
-    const { latLonData, setLatLonData } = useContext(LatLonProvider);
+    const { latLonData } = useContext(LatLonProvider);
 
-    const [weatherData, error] = useGetWeatherData(latLonData?.name, latLonData?.lat!, latLonData?.lon!);
+    const [weatherData] = useGetWeatherData(latLonData?.name, latLonData?.lat!, latLonData?.lon!);
 
-    const data = getProcessedDailyData(weatherData.daily);
+    const data = getProcessedDailyData(weatherData.daily)?.toSpliced(0, 1);
 
     function handleWeatherCondition(code: number) {
         const weatherCondition = processWeatherCode(code);
@@ -28,18 +28,17 @@ const DailyCards = () => {
             </View>
         );
     }
-
     if (!fontsLoaded) {
         return <Text>Loading...</Text>;
     } else {
         return (
             <FlatList
                 data={data}
-                keyExtractor={(item, index) => index.toString()}
+                keyExtractor={(_, index) => index.toString()}
                 renderItem={({ item }) => {
                     return (
                         <View style={styles.container}>
-                            <Text style={[styles.date, styles.text]}>{item!.time.split('-').reverse().join('/')}</Text>
+                            <Text style={[styles.date, styles.text]}>{item?.time.split('-').reverse().join('/')}</Text>
                             <View style={styles.boxContainer}>
                                 <Text style={[styles.text, styles.temp]}>
                                     {'Max: '}

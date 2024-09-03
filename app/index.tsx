@@ -1,3 +1,4 @@
+import { ImageBackground, Dimensions, StyleSheet } from 'react-native';
 import React, { useState, createContext } from 'react';
 import HomeScreen from '@/app/(tabs)/homescreen';
 import { LatLonData } from '@/interfaces/latLonData';
@@ -12,10 +13,24 @@ const App = () => {
     return (
         <LatLonProvider.Provider value={{ latLonData, setLatLonData }}>
             <LocationContext.Provider value={{ searchQuery, setSearchQuery }}>
-                <HomeScreen />
+                <ImageBackground style={[styles.imageBg]} resizeMode="cover" source={require('@/assets/images/bluesky.png')}>
+                    <HomeScreen />
+                </ImageBackground>
             </LocationContext.Provider>
         </LatLonProvider.Provider>
     );
 };
 
 export default React.memo(App);
+
+const styles = StyleSheet.create({
+    container: {
+        zIndex: -50,
+    },
+
+    imageBg: {
+        zIndex: -40,
+        height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width,
+    },
+});

@@ -1,7 +1,9 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
 import React, { useContext, useEffect } from 'react';
-import { Colors } from '@/constants/Colors';
 import { useFonts } from 'expo-font';
+import { Link } from 'expo-router';
+
+import { Colors } from '@/constants/Colors';
 import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
 import { useGetWeatherData } from '@/hooks/useGetWeatherData';
 import { LatLonProvider } from '@/app/index';
@@ -9,11 +11,11 @@ import { processWeatherCode } from '@/helpers/weatherCodeProcessor';
 import { getData, setData } from '@/helpers/storage';
 
 const MainCard = () => {
-    const { latLonData, setLatLonData } = useContext(LatLonProvider);
-
     const [fontsLoaded] = useFonts({
         fontPort: PortLligatSlab_400Regular,
     });
+
+    const { latLonData, setLatLonData } = useContext(LatLonProvider);
 
     useEffect(() => {
         getData('latLonData').then((data) => {
@@ -32,6 +34,10 @@ const MainCard = () => {
         setData('weather', { weather: weatherCondition?.description });
     }, [weatherCondition?.description]);
 
+    function handlePress() {
+        console.log('hello');
+    }
+
     if (!fontsLoaded) {
         return (
             <View style={styles.container}>
@@ -46,19 +52,21 @@ const MainCard = () => {
                     {latLonData?.country ? ', ' + latLonData.country : null}
                 </Text>
                 <View style={styles.hr}></View>
-                <View style={styles.card}>
-                    <Text style={[styles.text, styles.temperature]}>
-                        {weatherData.current?.temperature_2m}
-                        {weatherData.current_units?.temperature_2m}
-                    </Text>
-                    <Text style={[styles.text, styles.appTemperature]}>
-                        {weatherData.current?.apparent_temperature ? 'Feels Like' : null} {weatherData.current?.apparent_temperature}
-                        {weatherData.current_units?.temperature_2m}
-                    </Text>
+                <Link href={'/hourlyweather'} style={styles.linkContainer}>
+                    <View style={styles.card}>
+                        <Text style={[styles.text, styles.temperature]}>
+                            {weatherData.current?.temperature_2m}
+                            {weatherData.current_units?.temperature_2m}
+                        </Text>
+                        <Text style={[styles.text, styles.appTemperature]}>
+                            {weatherData.current?.apparent_temperature ? 'Feels Like' : null} {weatherData.current?.apparent_temperature}
+                            {weatherData.current_units?.temperature_2m}
+                        </Text>
 
-                    <Image style={styles.image} source={weatherCondition?.image2} />
-                    <Text style={[styles.text, styles.weatherDescription]}>{weatherCondition?.description}</Text>
-                </View>
+                        <Image style={styles.image} source={weatherCondition?.image2} />
+                        <Text style={[styles.text, styles.weatherDescription]}>{weatherCondition?.description}</Text>
+                    </View>
+                </Link>
                 <View style={styles.hr}></View>
             </View>
         );
@@ -81,15 +89,17 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.darkMode.light,
     },
 
+    linkContainer: {
+        width: '90%',
+    },
+
     card: {
-        width: '80%',
-        // height: '45%',
-        marginVertical: 10,
         justifyContent: 'space-evenly',
         alignItems: 'center',
         borderRadius: 30,
         backgroundColor: Colors.darkMode.richblack,
         padding: 15,
+        width: '100%',
     },
 
     text: {

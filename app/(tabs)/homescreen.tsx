@@ -1,5 +1,6 @@
-import { StyleSheet, Pressable, View } from 'react-native';
-import React, { useState } from 'react';
+import { StyleSheet, Pressable, View, ScrollView, RefreshControl } from 'react-native';
+import React, { useState, useReducer } from 'react';
+
 import { Colors } from '@/constants/Colors';
 import MainCard from '@/components/mainCard';
 import Search from '@/components/search';
@@ -8,13 +9,23 @@ import DailyCards from '@/components/dailyCards';
 
 const HomeScreen = () => {
     const [searchIconDisplay, setSearchIconDisplay] = useState(true);
+    const [refreshing, setRefreshing] = React.useState(false);
+    const [_, forceUpdate] = useReducer((x) => x + 1, 0);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        setTimeout(() => {
+            forceUpdate();
+            setRefreshing(false);
+        }, 2000);
+    }, []);
 
     function handleIconDisplay() {
         setSearchIconDisplay(true);
     }
 
     return (
-        <View style={styles.container}>
+        <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} style={styles.container}>
             <Pressable style={styles.searchIconContainer} onPress={() => setSearchIconDisplay(false)}>
                 <Feather name="search" style={[!searchIconDisplay && { display: 'none' }, styles.searchIcon]} />
             </Pressable>
@@ -25,7 +36,7 @@ const HomeScreen = () => {
             <View style={styles.dailyCardsContainer}>
                 <DailyCards />
             </View>
-        </View>
+        </ScrollView>
     );
 };
 

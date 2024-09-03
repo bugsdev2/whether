@@ -3,7 +3,7 @@ import { DailyWeatherDataArrOfObj } from '@/interfaces/dailyWeatherData';
 export function getProcessedDailyData(obj: any, numOfDays: number = 7): DailyWeatherDataArrOfObj[] | undefined {
     if (obj) {
         const processedArr: DailyWeatherDataArrOfObj[] = [];
-        for (let i = 0; i < numOfDays; i++) {
+        for (let i = 0; i < numOfDays + 1; i++) {
             let tempObj = {
                 apparent_temperature_max: obj['apparent_temperature_max'][i],
                 apparent_temperature_min: obj['apparent_temperature_min'][i],

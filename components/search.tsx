@@ -19,12 +19,26 @@ const Search = (props: { iconDisplay: () => void }) => {
 
     const data = useGetLanLon(searchQuery);
 
+    const searchSuggestions = data?.map((item) => {
+        return (
+            <View key={item.id} style={styles.searchSuggestions}>
+                <Pressable onPress={() => handleLocationSelection(item?.name, item?.latitude, item?.longitude, item?.admin1, item?.country)}>
+                    <Text style={styles.text}>
+                        {item?.name}
+                        {item?.admin1 && ', ' + item?.admin1 + ','} {item?.country}
+                    </Text>
+                </Pressable>
+            </View>
+        );
+    });
+
     return (
         <View>
             <View style={styles.inputContainer}>
                 <TextInput style={styles.input} autoFocus value={searchQuery} placeholder="enter the location here" placeholderTextColor={Colors.darkMode.light} onChangeText={(query) => setSearchQuery(query)} />
             </View>
-            <FlatList
+            <View>{searchSuggestions}</View>
+            {/* <FlatList
                 keyboardShouldPersistTaps="handled"
                 style={styles.flatListView}
                 data={data}
@@ -42,7 +56,7 @@ const Search = (props: { iconDisplay: () => void }) => {
                 }}
                 keyExtractor={(item) => item.id.toString()}
                 ListEmptyComponent={<View style={{ display: 'none' }}></View>}
-            />
+            /> */}
         </View>
     );
 };
