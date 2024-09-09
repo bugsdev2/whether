@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { HourlyWeatherData } from '@/interfaces/hourlyWeatherData';
 
-export const getHourlyWeatherData = (name: string, lat: number = 0, lon: number = 0) => {
-    const [data, setData] = useState();
+export const getHourlyWeatherData = (name: string, lat: number = 0, lon: number = 0): HourlyWeatherData => {
+    const [data, setData] = useState<HourlyWeatherData>({});
     const [err, setErr] = useState('');
 
     var latitude = lat.toString();

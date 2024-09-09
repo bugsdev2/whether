@@ -9,7 +9,7 @@ export const setData = async (key: string, value: {}) => {
     }
 };
 
-export const getData = async (key: string): Promise<LatLonData | undefined> => {
+export const getData = async (key: string): Promise<any> => {
     try {
         const value = await AsyncStorage.getItem(key);
         if (value !== null) {

@@ -1,6 +1,6 @@
-import { Slot, Stack } from 'expo-router';
+import { Stack } from 'expo-router';
 
-export default function layout() {
+export default function TabsLayout() {
     return (
         <Stack>
             <Stack.Screen
@@ -9,7 +9,12 @@ export default function layout() {
                     headerShown: false,
                 }}
             />
-            <Slot />
+            <Stack.Screen
+                name="homescreen"
+                options={{
+                    headerShown: false,
+                }}
+            />
         </Stack>
     );
 }

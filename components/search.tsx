@@ -22,7 +22,7 @@ const Search = (props: { iconDisplay: () => void }) => {
     const searchSuggestions = data?.map((item) => {
         return (
             <View key={item.id} style={styles.searchSuggestions}>
-                <Pressable onPress={() => handleLocationSelection(item?.name, item?.latitude, item?.longitude, item?.admin1, item?.country)}>
+                <Pressable onPress={() => handleLocationSelection(item?.name, item?.latitude, item?.longitude, item?.admin1, item?.country)} onTouchStart={() => handleLocationSelection(item?.name, item?.latitude, item?.longitude, item?.admin1, item?.country)}>
                     <Text style={styles.text}>
                         {item?.name}
                         {item?.admin1 && ', ' + item?.admin1 + ','} {item?.country}
@@ -35,9 +35,9 @@ const Search = (props: { iconDisplay: () => void }) => {
     return (
         <View>
             <View style={styles.inputContainer}>
-                <TextInput style={styles.input} autoFocus value={searchQuery} placeholder="enter the location here" placeholderTextColor={Colors.darkMode.light} onChangeText={(query) => setSearchQuery(query)} />
+                <TextInput style={styles.input} autoFocus value={searchQuery} placeholder="enter the location here" placeholderTextColor={Colors.lightMode.light} onChangeText={(query) => setSearchQuery(query)} />
             </View>
-            <View>{searchSuggestions}</View>
+            <View style={{ alignItems: 'center' }}>{searchSuggestions}</View>
             {/* <FlatList
                 keyboardShouldPersistTaps="handled"
                 style={styles.flatListView}
@@ -77,13 +77,13 @@ const styles = StyleSheet.create({
 
     input: {
         borderWidth: 1,
-        backgroundColor: Colors.darkMode.richblack,
+        backgroundColor: Colors.lightMode.richblack,
         flex: 1,
-        borderColor: Colors.darkMode.light,
+        borderColor: Colors.lightMode.light,
         borderRadius: 30,
         paddingHorizontal: 15,
         paddingVertical: 2,
-        color: Colors.darkMode.light,
+        color: Colors.lightMode.light,
     },
 
     btn: {
@@ -94,11 +94,11 @@ const styles = StyleSheet.create({
     },
 
     btnTxt: {
-        color: Colors.darkMode.light,
+        color: Colors.lightMode.light,
     },
 
     listContainer: {
-        backgroundColor: Colors.darkMode.light,
+        backgroundColor: Colors.lightMode.light,
     },
 
     flatListView: {
@@ -110,8 +110,9 @@ const styles = StyleSheet.create({
     },
 
     searchSuggestions: {
-        backgroundColor: Colors.darkMode.light,
+        backgroundColor: Colors.lightMode.light,
         paddingVertical: 10,
         paddingHorizontal: 10,
+        width: '92%',
     },
 });

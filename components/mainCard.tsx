@@ -1,41 +1,22 @@
+import React from 'react';
 import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
-import React, { useContext, useEffect } from 'react';
 import { useFonts } from 'expo-font';
 import { Link } from 'expo-router';
+import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
 
 import { Colors } from '@/constants/Colors';
-import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
-import { useGetWeatherData } from '@/hooks/useGetWeatherData';
-import { LatLonProvider } from '@/app/index';
-import { processWeatherCode } from '@/helpers/weatherCodeProcessor';
-import { getData, setData } from '@/helpers/storage';
+import { MainCardData } from '@/interfaces/mainCardData';
+import { setData } from '@/helpers/storage';
 
-const MainCard = () => {
+const MainCard = (props: MainCardData) => {
+    const { latLonData, weatherData, weatherCondition } = props;
+
     const [fontsLoaded] = useFonts({
         fontPort: PortLligatSlab_400Regular,
     });
 
-    const { latLonData, setLatLonData } = useContext(LatLonProvider);
-
-    useEffect(() => {
-        getData('latLonData').then((data) => {
-            if (data) {
-                setLatLonData(data);
-            }
-        });
-    }, []);
-
-    let [weatherData, error] = useGetWeatherData(latLonData?.name, latLonData?.lat!, latLonData?.lon!);
-
-    let timeOfDay: 'day' | 'night' = weatherData!.current?.is_day ? 'day' : 'night';
-    const weatherCondition = processWeatherCode(weatherData!.current?.weather_code!, timeOfDay);
-
-    useEffect(() => {
-        setData('weather', { weather: weatherCondition?.description });
-    }, [weatherCondition?.description]);
-
-    function handlePress() {
-        console.log('hello');
+    function handleTouchStart(time: string) {
+        setData('time', time.slice(0, 10));
     }
 
     if (!fontsLoaded) {
@@ -52,20 +33,19 @@ const MainCard = () => {
                     {latLonData?.country ? ', ' + latLonData.country : null}
                 </Text>
                 <View style={styles.hr}></View>
-                <Link href={'/hourlyweather'} style={styles.linkContainer}>
-                    <View style={styles.card}>
+                <Link asChild href={'/hourlyweather'} style={styles.linkContainer}>
+                    <Pressable onTouchStart={() => handleTouchStart(weatherData?.current?.time!)} style={styles.card}>
                         <Text style={[styles.text, styles.temperature]}>
-                            {weatherData.current?.temperature_2m}
-                            {weatherData.current_units?.temperature_2m}
+                            {weatherData?.current?.temperature_2m}
+                            {weatherData?.current_units?.temperature_2m}
                         </Text>
                         <Text style={[styles.text, styles.appTemperature]}>
-                            {weatherData.current?.apparent_temperature ? 'Feels Like' : null} {weatherData.current?.apparent_temperature}
-                            {weatherData.current_units?.temperature_2m}
+                            {weatherData?.current?.apparent_temperature ? 'Feels Like' : null} {weatherData?.current?.apparent_temperature}
+                            {weatherData?.current_units?.temperature_2m}
                         </Text>
-
                         <Image style={styles.image} source={weatherCondition?.image2} />
                         <Text style={[styles.text, styles.weatherDescription]}>{weatherCondition?.description}</Text>
-                    </View>
+                    </Pressable>
                 </Link>
                 <View style={styles.hr}></View>
             </View>
@@ -86,7 +66,7 @@ const styles = StyleSheet.create({
         height: 2,
         width: '90%',
         opacity: 0.4,
-        backgroundColor: Colors.darkMode.light,
+        backgroundColor: Colors.lightMode.light,
     },
 
     linkContainer: {
@@ -94,16 +74,14 @@ const styles = StyleSheet.create({
     },
 
     card: {
-        justifyContent: 'space-evenly',
         alignItems: 'center',
         borderRadius: 30,
-        backgroundColor: Colors.darkMode.richblack,
+        backgroundColor: Colors.lightMode.richblack,
         padding: 15,
-        width: '100%',
     },
 
     text: {
-        color: Colors.darkMode.light,
+        color: Colors.lightMode.light,
         fontFamily: 'fontPort',
     },
 

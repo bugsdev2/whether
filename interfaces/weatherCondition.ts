@@ -1,10 +1,7 @@
+import { ImageSourcePropType } from 'react-native';
+
 export interface WeatherCondition {
-    day: {
-        description: string;
-        image: string;
-    };
-    night: {
-        description: string;
-        image: string;
-    };
+    description: string;
+    image: ImageSourcePropType | undefined;
+    image2: ImageSourcePropType | undefined;
 }
