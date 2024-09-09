@@ -74,6 +74,7 @@ const DailyCards = (props: { latLonData: LatLonData }) => {
                 }}
                 horizontal
                 showsHorizontalScrollIndicator={false}
+                // ItemSeparatorComponent={() => <View style={styles.seperator}></View>}
             />
         );
     }
@@ -116,5 +117,10 @@ const styles = StyleSheet.create({
 
     weatherDescription: {
         fontSize: 22,
+    },
+
+    seperator: {
+        // borderWidth: 1,
+        // borderColor: 'rgba(255,255,255,0.5)',
     },
 });
