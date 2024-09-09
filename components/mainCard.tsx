@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     },
 
     hr: {
-        marginVertical: 10,
+        marginVertical: 20,
         height: 2,
         width: '90%',
         opacity: 0.4,
@@ -97,14 +97,16 @@ const styles = StyleSheet.create({
 
     appTemperature: {
         fontSize: 22,
+        marginBottom: -15,
     },
 
     image: {
-        width: 170,
-        height: 170,
+        width: 200,
+        height: 200,
     },
 
     weatherDescription: {
         fontSize: 25,
+        marginTop: -15,
     },
 });
