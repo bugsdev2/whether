@@ -1,11 +1,12 @@
-import { View, Pressable, StyleSheet, ScrollView, Dimensions, Text, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import { View, Pressable, StyleSheet, ScrollView, Dimensions, Text, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from '@expo/vector-icons/Feather';
 import MIcon from '@expo/vector-icons/MaterialIcons';
 import { useNavigation } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
+
 import { getHourlyWeatherData } from '@/helpers/getHourlyWeatherData';
 import { getData } from '@/helpers/storage';
 import { LatLonData } from '@/interfaces/latLonData';

@@ -1,23 +1,20 @@
-import { FlatList, StyleSheet, TextInput, View, Text, Pressable, SafeAreaView, Keyboard } from 'react-native';
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
+import { StyleSheet, TextInput, View, Text, Pressable, Keyboard } from 'react-native';
+
 import { Colors } from '@/constants/Colors';
-import { LocationContext } from '@/app/index';
-import { LatLonProvider } from '@/app/index';
 import { useGetLanLon } from '@/hooks/useGetLatLon';
 import { setData } from '@/helpers/storage';
 
 const Search = (props: { iconDisplay: () => void }) => {
-    const { latLonData, setLatLonData } = useContext(LatLonProvider);
-    const { searchQuery, setSearchQuery } = useContext(LocationContext);
+    const [searchQuery, setSearchQuery] = useState<string>('');
 
     function handleLocationSelection(name: string, lat: number, lon: number, admin1: string, country: string) {
-        setLatLonData({ name, lat, lon, admin1, country });
         setData('latLonData', { name, lat, lon, admin1, country });
         Keyboard.dismiss();
         props.iconDisplay();
     }
 
-    const data = useGetLanLon(searchQuery);
+    const data = useGetLanLon(searchQuery ? searchQuery : '');
 
     const searchSuggestions = data?.map((item) => {
         return (

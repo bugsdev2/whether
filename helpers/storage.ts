@@ -1,5 +1,4 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { LatLonData } from '@/interfaces/latLonData';
 
 export const setData = async (key: string, value: {}) => {
     try {

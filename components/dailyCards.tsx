@@ -1,16 +1,16 @@
 import { FlatList, StyleSheet, Text, View, Image, Pressable } from 'react-native';
-import React, { useContext } from 'react';
-import { Colors } from '@/constants/Colors';
+import { Link } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
+
+import { Colors } from '@/constants/Colors';
 import { useGetWeatherData } from '@/hooks/useGetWeatherData';
-import { LatLonProvider } from '@/app/index';
+import { LatLonData } from '@/interfaces/latLonData';
 import { getProcessedDailyData } from '@/helpers/processDailyWeatherData';
 import { processWeatherCode } from '@/helpers/weatherCodeProcessor';
 import { setData } from '@/helpers/storage';
-import { Link } from 'expo-router';
 
-const DailyCards = () => {
+const DailyCards = (props: { latLonData: LatLonData }) => {
     const [fontsLoaded] = useFonts({
         fontPort: PortLligatSlab_400Regular,
     });
@@ -19,9 +19,7 @@ const DailyCards = () => {
         setData('time', time);
     }
 
-    const { latLonData } = useContext(LatLonProvider);
-
-    const [weatherData] = useGetWeatherData(latLonData?.name, latLonData?.lat!, latLonData?.lon!);
+    const [weatherData] = useGetWeatherData(props.latLonData.name, props.latLonData?.lat!, props.latLonData?.lon!);
 
     const data = getProcessedDailyData(weatherData.daily)?.toSpliced(0, 1);
 

@@ -1,18 +1,17 @@
 import { StyleSheet, Pressable, View, ScrollView, RefreshControl } from 'react-native';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Colors } from '@/constants/Colors';
 import { Feather } from '@expo/vector-icons';
-import { getData, setData } from '@/helpers/storage';
+import { getData } from '@/helpers/storage';
 import { useGetWeatherData } from '@/hooks/useGetWeatherData';
 import { processWeatherCode } from '@/helpers/weatherCodeProcessor';
-import { getHourlyWeatherData } from '@/helpers/getHourlyWeatherData';
 
 import Search from '@/components/search';
 import MainCard from '@/components/mainCard';
 import DailyCards from '@/components/dailyCards';
 
-import { LatLonProvider } from '@/app/index';
+import { LatLonData } from '@/interfaces/latLonData';
 
 const HomeScreen = () => {
     //////////////////// search icon display ////////////////////
@@ -23,16 +22,12 @@ const HomeScreen = () => {
     }
     ////////////////////////////////////////////////////////////
 
-    const { latLonData, setLatLonData } = useContext(LatLonProvider);
+    const [latLonData, setLatLonData] = useState<LatLonData>({ name: '', lat: 0, lon: 0, admin1: '', country: '' });
 
     let [weatherData, error] = useGetWeatherData(latLonData?.name, latLonData?.lat!, latLonData?.lon!);
 
     let timeOfDay: 'day' | 'night' = weatherData!.current?.is_day ? 'day' : 'night';
     const weatherCondition = processWeatherCode(weatherData?.current?.weather_code!, timeOfDay);
-
-    useEffect(() => {
-        setData('weather', { weather: weatherCondition?.description });
-    }, [weatherCondition?.description]);
 
     const [refreshing, setRefreshing] = React.useState(false);
 
@@ -42,7 +37,7 @@ const HomeScreen = () => {
                 setLatLonData(data);
             }
         });
-    }, []);
+    }, [searchIconDisplay]); // using searchIconDisplay so that the function runs when it changes
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
@@ -54,7 +49,7 @@ const HomeScreen = () => {
             });
             setRefreshing(false);
         }, 2000);
-    }, []);
+    }, [latLonData]);
 
     return (
         <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} style={styles.container}>
@@ -66,7 +61,7 @@ const HomeScreen = () => {
                 <MainCard latLonData={latLonData} weatherData={weatherData} weatherCondition={weatherCondition} />
             </View>
             <View style={styles.dailyCardsContainer}>
-                <DailyCards />
+                <DailyCards latLonData={latLonData} />
             </View>
         </ScrollView>
     );
