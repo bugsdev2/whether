@@ -1,10 +1,9 @@
 import weatherCodes from '@/constants/weatherCodes';
+import { WeatherCondition } from '@/interfaces/weatherCondition';
 
-export function processWeatherCode(code: number, timeOfDay: string = 'day') {
+export function processWeatherCode(code: number, timeOfDay: string = 'day'): WeatherCondition {
     for (let key in weatherCodes) {
-        if (code == undefined) return;
-
-        if (code.toString() === key) {
+        if (code?.toString() === key) {
             if (timeOfDay == 'day') {
                 return weatherCodes[key].day;
             } else {
@@ -12,4 +11,9 @@ export function processWeatherCode(code: number, timeOfDay: string = 'day') {
             }
         }
     }
+    return {
+        description: '',
+        image: undefined,
+        image2: undefined,
+    };
 }

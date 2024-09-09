@@ -285,13 +285,13 @@ const weatherCodes: WeatherCodes = {
         day: {
             description: 'Light Showers',
             image: require('@/assets/images/weather-icons/drizzle.png'),
-            image2: require('@/assets/images/weather-icons2/drizzle-day.png'),
+            image2: require('@/assets/images/weather-icons2/rainy-day.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/drizzle.png',
         },
         night: {
             description: 'Light Showers',
             image: require('@/assets/images/weather-icons/drizzle.png'),
-            image2: require('@/assets/images/weather-icons2/drizzle-night.png'),
+            image2: require('@/assets/images/weather-icons2/rainy-night.png'),
             imageOnline: 'https://raw.githubusercontent.com/bugsdev2/whether/main/assets/imageOnlines/weather-icons/drizzle.png',
         },
     },

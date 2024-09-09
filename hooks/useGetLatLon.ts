@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 
 export interface GeoData {
     admin1: string;

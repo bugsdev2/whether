@@ -1,23 +1,27 @@
-import { FlatList, StyleSheet, Text, View, Image } from 'react-native';
-import React, { useContext } from 'react';
-import { Colors } from '@/constants/Colors';
+import { FlatList, StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { Link } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
+
+import { Colors } from '@/constants/Colors';
 import { useGetWeatherData } from '@/hooks/useGetWeatherData';
-import { LatLonProvider } from '@/app/index';
+import { LatLonData } from '@/interfaces/latLonData';
 import { getProcessedDailyData } from '@/helpers/processDailyWeatherData';
 import { processWeatherCode } from '@/helpers/weatherCodeProcessor';
+import { setData } from '@/helpers/storage';
 
-const DailyCards = () => {
+const DailyCards = (props: { latLonData: LatLonData }) => {
     const [fontsLoaded] = useFonts({
         fontPort: PortLligatSlab_400Regular,
     });
 
-    const { latLonData, setLatLonData } = useContext(LatLonProvider);
+    function handleTouchStart(time: string) {
+        setData('time', time);
+    }
 
-    const [weatherData, error] = useGetWeatherData(latLonData?.name, latLonData?.lat!, latLonData?.lon!);
+    const [weatherData] = useGetWeatherData(props.latLonData.name, props.latLonData?.lat!, props.latLonData?.lon!);
 
-    const data = getProcessedDailyData(weatherData.daily);
+    const data = getProcessedDailyData(weatherData.daily)?.toSpliced(0, 1);
 
     function handleWeatherCondition(code: number) {
         const weatherCondition = processWeatherCode(code);
@@ -29,31 +33,43 @@ const DailyCards = () => {
         );
     }
 
+    function processTime(dateStr: string, func: string) {
+        const date = new Date(dateStr);
+
+        switch (func) {
+            case 'titleDate':
+                return `${date.toDateString().slice(0, 10)}`;
+                break;
+        }
+    }
+
     if (!fontsLoaded) {
         return <Text>Loading...</Text>;
     } else {
         return (
             <FlatList
                 data={data}
-                keyExtractor={(item, index) => index.toString()}
+                keyExtractor={(_, index) => index.toString()}
                 renderItem={({ item }) => {
                     return (
-                        <View style={styles.container}>
-                            <Text style={[styles.date, styles.text]}>{item!.time.split('-').reverse().join('/')}</Text>
-                            <View style={styles.boxContainer}>
-                                <Text style={[styles.text, styles.temp]}>
-                                    {'Max: '}
-                                    {item!.temperature_2m_max}
-                                    {'°C'}
-                                </Text>
-                                <Text style={[styles.text, styles.temp]}>
-                                    {'Min: '}
-                                    {item!.temperature_2m_min}
-                                    {'°C'}
-                                </Text>
-                                {handleWeatherCondition(item.weather_code)}
-                            </View>
-                        </View>
+                        <Link asChild href="/(tabs)/hourlyweather">
+                            <Pressable onTouchStart={() => handleTouchStart(item?.time)} style={styles.container}>
+                                <Text style={[styles.date, styles.text]}>{processTime(item?.time, 'titleDate')}</Text>
+                                <View style={styles.boxContainer}>
+                                    <Text style={[styles.text, styles.temp]}>
+                                        {'Max: '}
+                                        {item!.temperature_2m_max}
+                                        {'°C'}
+                                    </Text>
+                                    <Text style={[styles.text, styles.temp]}>
+                                        {'Min: '}
+                                        {item!.temperature_2m_min}
+                                        {'°C'}
+                                    </Text>
+                                    {handleWeatherCondition(item.weather_code)}
+                                </View>
+                            </Pressable>
+                        </Link>
                     );
                 }}
                 horizontal
@@ -71,7 +87,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        color: Colors.darkMode.light,
+        color: Colors.lightMode.light,
         fontFamily: 'fontPort',
     },
 
@@ -82,13 +98,11 @@ const styles = StyleSheet.create({
     boxContainer: {
         minWidth: 200,
         padding: 15,
-        // borderWidth: 1,
-        borderColor: Colors.darkMode.gray,
         alignItems: 'center',
         marginHorizontal: 15,
         marginTop: 5,
         borderRadius: 20,
-        backgroundColor: Colors.darkMode.richblack,
+        backgroundColor: Colors.lightMode.richblack,
     },
 
     image: {

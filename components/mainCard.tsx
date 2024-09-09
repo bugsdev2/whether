@@ -1,36 +1,23 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
-import React, { useContext, useEffect } from 'react';
-import { Colors } from '@/constants/Colors';
+import React from 'react';
+import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
 import { useFonts } from 'expo-font';
+import { Link } from 'expo-router';
 import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
-import { useGetWeatherData } from '@/hooks/useGetWeatherData';
-import { LatLonProvider } from '@/app/index';
-import { processWeatherCode } from '@/helpers/weatherCodeProcessor';
-import { getData, setData } from '@/helpers/storage';
 
-const MainCard = () => {
-    const { latLonData, setLatLonData } = useContext(LatLonProvider);
+import { Colors } from '@/constants/Colors';
+import { MainCardData } from '@/interfaces/mainCardData';
+import { setData } from '@/helpers/storage';
+
+const MainCard = (props: MainCardData) => {
+    const { latLonData, weatherData, weatherCondition } = props;
 
     const [fontsLoaded] = useFonts({
         fontPort: PortLligatSlab_400Regular,
     });
 
-    useEffect(() => {
-        getData('latLonData').then((data) => {
-            if (data) {
-                setLatLonData(data);
-            }
-        });
-    }, []);
-
-    let [weatherData, error] = useGetWeatherData(latLonData?.name, latLonData?.lat!, latLonData?.lon!);
-
-    let timeOfDay: 'day' | 'night' = weatherData!.current?.is_day ? 'day' : 'night';
-    const weatherCondition = processWeatherCode(weatherData!.current?.weather_code!, timeOfDay);
-
-    useEffect(() => {
-        setData('weather', { weather: weatherCondition?.description });
-    }, [weatherCondition?.description]);
+    function handleTouchStart(time: string) {
+        setData('time', time.slice(0, 10));
+    }
 
     if (!fontsLoaded) {
         return (
@@ -46,19 +33,20 @@ const MainCard = () => {
                     {latLonData?.country ? ', ' + latLonData.country : null}
                 </Text>
                 <View style={styles.hr}></View>
-                <View style={styles.card}>
-                    <Text style={[styles.text, styles.temperature]}>
-                        {weatherData.current?.temperature_2m}
-                        {weatherData.current_units?.temperature_2m}
-                    </Text>
-                    <Text style={[styles.text, styles.appTemperature]}>
-                        {weatherData.current?.apparent_temperature ? 'Feels Like' : null} {weatherData.current?.apparent_temperature}
-                        {weatherData.current_units?.temperature_2m}
-                    </Text>
-
-                    <Image style={styles.image} source={weatherCondition?.image2} />
-                    <Text style={[styles.text, styles.weatherDescription]}>{weatherCondition?.description}</Text>
-                </View>
+                <Link asChild href={'/hourlyweather'} style={styles.linkContainer}>
+                    <Pressable onTouchStart={() => handleTouchStart(weatherData?.current?.time!)} style={styles.card}>
+                        <Text style={[styles.text, styles.temperature]}>
+                            {weatherData?.current?.temperature_2m}
+                            {weatherData?.current_units?.temperature_2m}
+                        </Text>
+                        <Text style={[styles.text, styles.appTemperature]}>
+                            {weatherData?.current?.apparent_temperature ? 'Feels Like' : null} {weatherData?.current?.apparent_temperature}
+                            {weatherData?.current_units?.temperature_2m}
+                        </Text>
+                        <Image style={styles.image} source={weatherCondition?.image2} />
+                        <Text style={[styles.text, styles.weatherDescription]}>{weatherCondition?.description}</Text>
+                    </Pressable>
+                </Link>
                 <View style={styles.hr}></View>
             </View>
         );
@@ -78,22 +66,22 @@ const styles = StyleSheet.create({
         height: 2,
         width: '90%',
         opacity: 0.4,
-        backgroundColor: Colors.darkMode.light,
+        backgroundColor: Colors.lightMode.light,
+    },
+
+    linkContainer: {
+        width: '90%',
     },
 
     card: {
-        width: '80%',
-        // height: '45%',
-        marginVertical: 10,
-        justifyContent: 'space-evenly',
         alignItems: 'center',
         borderRadius: 30,
-        backgroundColor: Colors.darkMode.richblack,
+        backgroundColor: Colors.lightMode.richblack,
         padding: 15,
     },
 
     text: {
-        color: Colors.darkMode.light,
+        color: Colors.lightMode.light,
         fontFamily: 'fontPort',
     },
 
