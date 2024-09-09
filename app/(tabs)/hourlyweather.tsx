@@ -55,8 +55,9 @@ const Hourlyweather = () => {
         }
     }
 
-    function handleWeatherCondition(code: number) {
-        const weatherCondition = processWeatherCode(code);
+    function handleWeatherCondition(code: number, is_day: number) {
+        let timeOfDay: 'day' | 'night' = is_day ? 'day' : 'night';
+        const weatherCondition = processWeatherCode(code, timeOfDay);
         return (
             <View style={styles.weatherImgContainer}>
                 <Image style={styles.image} source={weatherCondition?.image2} />
@@ -110,7 +111,7 @@ const Hourlyweather = () => {
                                 <View>
                                     <Text style={[styles.text, styles.time]}>{processTime(item.time!, 'duration')}</Text>
                                     <View>
-                                        <View>{handleWeatherCondition(item.weather_code!)}</View>
+                                        <View>{handleWeatherCondition(item.weather_code!, item?.is_day!)}</View>
                                         <View style={styles.cardDetails}>
                                             <View style={styles.cardColumn}>
                                                 <View style={styles.smallIconContainer}>
