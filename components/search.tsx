@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, View, Text, Pressable, Keyboard } from 'react-native';
+import { StyleSheet, TextInput, View, Text, Pressable, Keyboard, Dimensions } from 'react-native';
 
 import { Colors } from '@/constants/Colors';
 import { useGetLanLon } from '@/hooks/useGetLatLon';
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
 
     text: {
         color: 'black',
+        fontSize: Dimensions.get('screen').width < 768 ? 16 : 18,
     },
 
     input: {
@@ -78,8 +79,9 @@ const styles = StyleSheet.create({
         flex: 1,
         borderColor: Colors.lightMode.light,
         borderRadius: 30,
-        paddingHorizontal: 15,
-        paddingVertical: 2,
+        paddingHorizontal: Dimensions.get('screen').width < 768 ? 15 : 25,
+        paddingVertical: Dimensions.get('screen').width < 768 ? 2 : 8,
+        fontSize: Dimensions.get('screen').width < 768 ? 16 : 18,
         color: Colors.lightMode.light,
     },
 
