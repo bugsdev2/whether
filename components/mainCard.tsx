@@ -15,8 +15,8 @@ const MainCard = (props: MainCardData) => {
         fontPort: PortLligatSlab_400Regular,
     });
 
-    function handleTouchStart(time: string) {
-        setData('time', time.slice(0, 10));
+    function handleTouchStart(time: string | undefined) {
+        if (time) setData('time', time?.slice(0, 10));
     }
 
     if (!fontsLoaded) {
@@ -34,7 +34,7 @@ const MainCard = (props: MainCardData) => {
                 </Text>
                 <View style={styles.hr}></View>
                 <Link asChild href={'/hourlyweather'} style={styles.linkContainer}>
-                    <Pressable onTouchStart={() => handleTouchStart(weatherData?.current?.time!)} style={styles.card}>
+                    <Pressable onTouchStart={() => handleTouchStart(weatherData?.current?.time)} style={styles.card}>
                         <View style={{ alignItems: 'center' }}>
                             <Text style={[styles.text, styles.temperature]}>
                                 {weatherData?.current?.temperature_2m}
