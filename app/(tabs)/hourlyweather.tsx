@@ -99,10 +99,10 @@ const Hourlyweather = () => {
                 <SafeAreaView style={{ flex: 1 }}>
                     <View style={styles.headerContainer}>
                         <Pressable onPress={() => navigate.goBack()} style={styles.iconBg}>
-                            <Icon name="arrow-left" size={25} color="white" />
+                            <Icon name="arrow-left" style={styles.text} color="white" />
                         </Pressable>
                         <View>
-                            <Text style={[styles.title]}>{processTime(date, 'titleDate')}</Text>
+                            <Text style={[styles.text, styles.title]}>{processTime(date, 'titleDate')}</Text>
                         </View>
                     </View>
                     <ScrollView style={{ flex: 1 }}>
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     text: {
         color: Colors.lightMode.light,
         fontFamily: 'fontPort',
-        fontSize: 22,
+        fontSize: Dimensions.get('screen').width < 768 ? 22 : 26,
     },
 
     imageBg: {
@@ -185,14 +185,13 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontSize: 20,
         color: Colors.lightMode.light,
         fontFamily: 'fontPort',
         paddingEnd: 10,
     },
 
     card: {
-        padding: 15,
+        padding: 20,
         backgroundColor: Colors.lightMode.richblack, // 'rgba(255,255,255,0.2)',
         margin: 15,
         borderRadius: 15,
@@ -228,8 +227,8 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        width: 60,
-        height: 60,
+        width: 80,
+        height: 80,
     },
 
     weatherImgContainer: {
@@ -238,7 +237,6 @@ const styles = StyleSheet.create({
     },
 
     weatherDescription: {
-        fontSize: 22,
         textAlign: 'center',
     },
 });

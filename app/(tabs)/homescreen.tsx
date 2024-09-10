@@ -1,4 +1,4 @@
-import { StyleSheet, Pressable, View, ScrollView, RefreshControl } from 'react-native';
+import { StyleSheet, Pressable, View, ScrollView, RefreshControl, Dimensions } from 'react-native';
 import React, { useState, useEffect } from 'react';
 
 import { Colors } from '@/constants/Colors';
@@ -52,7 +52,7 @@ const HomeScreen = () => {
     }, [latLonData]);
 
     return (
-        <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
             <Pressable style={styles.searchIconContainer} onPress={() => setSearchIconDisplay(false)}>
                 <Feather name="search" style={[!searchIconDisplay && { display: 'none' }, styles.searchIcon]} />
             </Pressable>
@@ -72,12 +72,12 @@ export default React.memo(HomeScreen);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: Colors.darkMode.bgGradientDark,
         padding: 10,
+        justifyContent: 'space-evenly',
     },
 
     searchIcon: {
-        fontSize: 25,
+        fontSize: Dimensions.get('screen').width < 768 ? 25 : 30,
         color: Colors.lightMode.light,
         textAlign: 'right',
     },
@@ -86,16 +86,19 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 10,
         top: 15,
+        zIndex: 50,
     },
 
     searchInputContainer: {
         zIndex: 10,
         position: 'absolute',
-        width: '100%',
+        top: 15,
+        left: 15,
+        right: 15,
     },
 
     mainCardContainer: {
-        marginTop: 35,
+        marginTop: Dimensions.get('screen').width < 768 ? 35 : 300,
     },
 
     dailyCardsContainer: {

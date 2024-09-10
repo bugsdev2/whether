@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Image, Pressable, Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
 import { Link } from 'expo-router';
 import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
@@ -35,16 +35,20 @@ const MainCard = (props: MainCardData) => {
                 <View style={styles.hr}></View>
                 <Link asChild href={'/hourlyweather'} style={styles.linkContainer}>
                     <Pressable onTouchStart={() => handleTouchStart(weatherData?.current?.time!)} style={styles.card}>
-                        <Text style={[styles.text, styles.temperature]}>
-                            {weatherData?.current?.temperature_2m}
-                            {weatherData?.current_units?.temperature_2m}
-                        </Text>
-                        <Text style={[styles.text, styles.appTemperature]}>
-                            {weatherData?.current?.apparent_temperature ? 'Feels Like' : null} {weatherData?.current?.apparent_temperature}
-                            {weatherData?.current_units?.temperature_2m}
-                        </Text>
-                        <Image style={styles.image} source={weatherCondition?.image2} />
-                        <Text style={[styles.text, styles.weatherDescription]}>{weatherCondition?.description}</Text>
+                        <View style={{ alignItems: 'center' }}>
+                            <Text style={[styles.text, styles.temperature]}>
+                                {weatherData?.current?.temperature_2m}
+                                {weatherData?.current_units?.temperature_2m}
+                            </Text>
+                            <Text style={[styles.text, styles.appTemperature]}>
+                                {weatherData?.current?.apparent_temperature ? 'Feels Like' : null} {weatherData?.current?.apparent_temperature}
+                                {weatherData?.current_units?.temperature_2m}
+                            </Text>
+                        </View>
+                        <View>
+                            <Image style={styles.image} source={weatherCondition?.image2} />
+                            <Text style={[styles.text, styles.weatherDescription]}>{weatherCondition?.description}</Text>
+                        </View>
                     </Pressable>
                 </Link>
                 <View style={styles.hr}></View>
@@ -78,6 +82,8 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         backgroundColor: Colors.lightMode.richblack,
         padding: 15,
+        flexDirection: Dimensions.get('screen').width < 768 ? 'column' : 'row',
+        justifyContent: Dimensions.get('screen').width < 768 ? 'center' : 'space-evenly',
     },
 
     text: {
@@ -87,16 +93,16 @@ const styles = StyleSheet.create({
 
     location: {
         paddingTop: 10,
-        fontSize: 25,
+        fontSize: Dimensions.get('screen').width < 768 ? 25 : 32,
         textAlign: 'center',
     },
 
     temperature: {
-        fontSize: 35,
+        fontSize: Dimensions.get('screen').width < 768 ? 35 : 50,
     },
 
     appTemperature: {
-        fontSize: 22,
+        fontSize: Dimensions.get('screen').width < 768 ? 22 : 26,
         marginBottom: -15,
     },
 
@@ -106,7 +112,8 @@ const styles = StyleSheet.create({
     },
 
     weatherDescription: {
-        fontSize: 25,
-        marginTop: -15,
+        fontSize: Dimensions.get('screen').width < 768 ? 25 : 30,
+        marginTop: Dimensions.get('screen').width < 768 ? -15 : -20,
+        textAlign: 'center',
     },
 });

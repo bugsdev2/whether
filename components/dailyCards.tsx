@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { FlatList, StyleSheet, Text, View, Image, Pressable, Dimensions } from 'react-native';
 import { Link } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
@@ -48,6 +48,8 @@ const DailyCards = (props: { latLonData: LatLonData }) => {
     } else {
         return (
             <FlatList
+                contentContainerStyle={styles.flatlistContainer}
+                key={'_'}
                 data={data}
                 keyExtractor={(_, index) => index.toString()}
                 renderItem={({ item }) => {
@@ -72,8 +74,10 @@ const DailyCards = (props: { latLonData: LatLonData }) => {
                         </Link>
                     );
                 }}
-                horizontal
+                horizontal={Dimensions.get('screen').width < 768 ? true : false}
                 showsHorizontalScrollIndicator={false}
+                numColumns={Dimensions.get('screen').width < 768 ? 1 : 3}
+
                 // ItemSeparatorComponent={() => <View style={styles.seperator}></View>}
             />
         );
@@ -83,6 +87,10 @@ const DailyCards = (props: { latLonData: LatLonData }) => {
 export default DailyCards;
 
 const styles = StyleSheet.create({
+    flatlistContainer: {
+        alignItems: 'center',
+    },
+
     container: {
         alignItems: 'center',
     },
@@ -93,7 +101,7 @@ const styles = StyleSheet.create({
     },
 
     date: {
-        fontSize: 20,
+        fontSize: Dimensions.get('screen').width < 768 ? 20 : 24,
     },
 
     boxContainer: {
@@ -102,6 +110,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginHorizontal: 15,
         marginTop: 5,
+        marginBottom: 15,
         borderRadius: 20,
         backgroundColor: Colors.lightMode.richblack,
     },
@@ -112,15 +121,15 @@ const styles = StyleSheet.create({
     },
 
     temp: {
-        fontSize: 18,
+        fontSize: Dimensions.get('screen').width < 768 ? 18 : 22,
     },
 
     weatherDescription: {
-        fontSize: 22,
+        fontSize: Dimensions.get('screen').width < 768 ? 22 : 26,
     },
 
-    seperator: {
-        // borderWidth: 1,
-        // borderColor: 'rgba(255,255,255,0.5)',
-    },
+    // seperator: {
+    //     borderWidth: 1,
+    //     borderColor: 'rgba(255,255,255,0.5)',
+    // },
 });
