@@ -12,6 +12,7 @@ import MainCard from '@/components/mainCard';
 import DailyCards from '@/components/dailyCards';
 
 import { LatLonData } from '@/interfaces/latLonData';
+import { WeatherCondition } from '@/interfaces/weatherCondition';
 
 const HomeScreen = () => {
     //////////////////// search icon display ////////////////////
@@ -27,7 +28,7 @@ const HomeScreen = () => {
     let [weatherData, error] = useGetWeatherData(latLonData?.name, latLonData?.lat!, latLonData?.lon!);
 
     let timeOfDay: 'day' | 'night' = weatherData!.current?.is_day ? 'day' : 'night';
-    const weatherCondition = processWeatherCode(weatherData?.current?.weather_code!, timeOfDay);
+    const weatherCondition: WeatherCondition = processWeatherCode(weatherData?.current?.weather_code!, timeOfDay);
 
     const [refreshing, setRefreshing] = React.useState(false);
 
