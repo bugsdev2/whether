@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Pressable, StyleSheet, ScrollView, Dimensions, Text, Image } from 'react-native';
+import { View, Pressable, StyleSheet, ScrollView, Dimensions, Text, Image, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from '@expo/vector-icons/Feather';
 import MIcon from '@expo/vector-icons/MaterialIcons';
@@ -95,8 +95,7 @@ const Hourlyweather = () => {
     } else {
         return (
             <View style={{ flex: 1 }}>
-                <Image style={[styles.imageBg]} resizeMode="cover" source={require('@/assets/images/bluesky.png')} />
-                <SafeAreaView style={{ flex: 1 }}>
+                <SafeAreaView style={styles.container}>
                     <View style={styles.headerContainer}>
                         <Pressable onPress={() => navigate.goBack()} style={styles.iconBg}>
                             <Icon name="arrow-left" style={styles.text} color="white" />
@@ -105,8 +104,10 @@ const Hourlyweather = () => {
                             <Text style={[styles.text, styles.title]}>{processTime(date, 'titleDate')}</Text>
                         </View>
                     </View>
-                    <ScrollView style={{ flex: 1 }}>
-                        {finalHourlyData?.map((item, index) => (
+                    <FlatList
+                        keyExtractor={(item) => item.time!.toString()}
+                        data={finalHourlyData}
+                        renderItem={({ item }) => (
                             <View key={item.time} style={styles.card}>
                                 <View>
                                     <Text style={[styles.text, styles.time]}>{processTime(item.time!, 'duration')}</Text>
@@ -145,8 +146,8 @@ const Hourlyweather = () => {
                                     </View>
                                 </View>
                             </View>
-                        ))}
-                    </ScrollView>
+                        )}
+                    />
                 </SafeAreaView>
             </View>
         );
@@ -156,6 +157,11 @@ const Hourlyweather = () => {
 export default Hourlyweather;
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: Colors.darkMode.dark,
+    },
+
     text: {
         color: Colors.lightMode.light,
         fontFamily: 'fontPort',
@@ -192,7 +198,7 @@ const styles = StyleSheet.create({
 
     card: {
         padding: 20,
-        backgroundColor: Colors.lightMode.richblack, // 'rgba(255,255,255,0.2)',
+        backgroundColor: Colors.darkMode.secondary, // 'rgba(255,255,255,0.2)',
         margin: 15,
         borderRadius: 15,
     },

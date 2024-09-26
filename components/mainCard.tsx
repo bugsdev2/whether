@@ -44,10 +44,10 @@ const MainCard = (props: MainCardData) => {
                                 {weatherData?.current?.apparent_temperature ? 'Feels Like' : null} {weatherData?.current?.apparent_temperature}
                                 {weatherData?.current_units?.temperature_2m}
                             </Text>
+                            <Text style={[styles.text, styles.weatherDescription]}>{weatherCondition?.description}</Text>
                         </View>
                         <View>
                             <Image style={styles.image} source={weatherCondition?.image2} />
-                            <Text style={[styles.text, styles.weatherDescription]}>{weatherCondition?.description}</Text>
                         </View>
                     </Pressable>
                 </Link>
@@ -70,20 +70,24 @@ const styles = StyleSheet.create({
         height: 2,
         width: '90%',
         opacity: 0.4,
-        backgroundColor: Colors.lightMode.light,
+        backgroundColor: Colors.darkMode.light,
     },
 
     linkContainer: {
-        width: '90%',
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 3,
+        borderColor: 'red',
     },
 
     card: {
         alignItems: 'center',
         borderRadius: 30,
-        backgroundColor: Colors.lightMode.richblack,
-        padding: 15,
-        flexDirection: Dimensions.get('screen').width < 768 ? 'column' : 'row',
-        justifyContent: Dimensions.get('screen').width < 768 ? 'center' : 'space-evenly',
+        backgroundColor: Colors.darkMode.dark,
+        padding: 10,
+        flexDirection: 'row',
     },
 
     text: {
@@ -103,7 +107,7 @@ const styles = StyleSheet.create({
 
     appTemperature: {
         fontSize: Dimensions.get('screen').width < 768 ? 22 : 26,
-        marginBottom: -15,
+        marginBottom: 15,
     },
 
     image: {
@@ -112,8 +116,8 @@ const styles = StyleSheet.create({
     },
 
     weatherDescription: {
-        fontSize: Dimensions.get('screen').width < 768 ? 25 : 30,
-        marginTop: Dimensions.get('screen').width < 768 ? -15 : -20,
+        fontSize: Dimensions.get('screen').width < 768 ? 22 : 26,
+        // marginTop: Dimensions.get('screen').width < 768 ? -15 : -20,
         textAlign: 'center',
     },
 });
