@@ -5,13 +5,11 @@ export interface WeatherCodes {
         day: {
             description: string;
             image: ImageSourcePropType | undefined;
-            image2: ImageSourcePropType | undefined;
             imageOnline: string;
         };
         night: {
             description: string;
             image: ImageSourcePropType | undefined;
-            image2: ImageSourcePropType | undefined;
             imageOnline: string;
         };
     };
