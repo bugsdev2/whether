@@ -60,43 +60,46 @@ const MainCard = (props: MainCardData) => {
                         </View>
                     </Pressable>
                 </Link>
-                <Link
-                    href={'/hourlyweather'}
-                    asChild
-                >
-                    <Pressable
-                        style={styles.secondaryDataContainer}
-                        onTouchStart={() => handleTouchStart(weatherData?.current?.time)}
+                {weatherData?.current?.apparent_temperature ? (
+                    <Link
+                        href={'/hourlyweather'}
+                        asChild
                     >
-                        <View style={styles.secondaryDataCard}>
-                            <MIcon
-                                style={styles.smallIcon}
-                                name="thermostat"
-                            />
-                            <Text style={[styles.text, styles.secondaryData]}>
-                                {weatherData?.current?.apparent_temperature}
-                                {weatherData?.current_units?.apparent_temperature}
-                            </Text>
-                            <Text style={[styles.text, { opacity: 0.5 }]}>Feels Like</Text>
-                        </View>
-                        <View style={styles.secondaryDataCard}>
-                            <Icon
-                                style={styles.smallIcon}
-                                name="wind"
-                            />
-                            <Text style={[styles.text, styles.secondaryData]}>{weatherData?.current?.wind_speed_10m}km/h</Text>
-                            <Text style={[styles.text, { opacity: 0.5 }]}>Wind Speed</Text>
-                        </View>
-                        <View style={styles.secondaryDataCard}>
-                            <MIcon
-                                style={styles.smallIcon}
-                                name="water-drop"
-                            />
-                            <Text style={[styles.text, styles.secondaryData]}>{weatherData?.current?.relative_humidity_2m + '%'}</Text>
-                            <Text style={[styles.text, { opacity: 0.5 }]}>Humidity</Text>
-                        </View>
-                    </Pressable>
-                </Link>
+                        <Pressable
+                            style={styles.secondaryDataContainer}
+                            onTouchStart={() => handleTouchStart(weatherData?.current?.time)}
+                        >
+                            <View style={styles.secondaryDataCard}>
+                                <MIcon
+                                    style={styles.smallIcon}
+                                    name="thermostat"
+                                />
+                                <Text style={[styles.text, styles.secondaryData]}>
+                                    {weatherData?.current?.apparent_temperature}
+                                    {weatherData?.current_units?.apparent_temperature}
+                                </Text>
+                                <Text style={[styles.text, { opacity: 0.5 }]}>Feels Like</Text>
+                            </View>
+                            <View style={styles.secondaryDataCard}>
+                                <Icon
+                                    style={styles.smallIcon}
+                                    name="wind"
+                                />
+                                <Text style={[styles.text, styles.secondaryData]}>{weatherData?.current?.wind_speed_10m}km/h</Text>
+                                <Text style={[styles.text, { opacity: 0.5 }]}>Wind Speed</Text>
+                            </View>
+                            <View style={styles.secondaryDataCard}>
+                                <MIcon
+                                    style={styles.smallIcon}
+                                    name="water-drop"
+                                />
+                                <Text style={[styles.text, styles.secondaryData]}>{weatherData?.current?.relative_humidity_2m + '%'}</Text>
+                                <Text style={[styles.text, { opacity: 0.5 }]}>Humidity</Text>
+                            </View>
+                        </Pressable>
+                    </Link>
+                ) : null}
+
                 <View style={styles.hr}></View>
             </View>
         );

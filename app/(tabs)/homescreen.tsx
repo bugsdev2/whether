@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     },
 
     mainCardContainer: {
-        marginTop: Dimensions.get('screen').width < 768 ? 35 : 300,
+        marginTop: Dimensions.get('screen').width < 768 ? 35 : 50,
     },
 
     dailyCardsContainer: {
