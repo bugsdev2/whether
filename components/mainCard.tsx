@@ -55,7 +55,7 @@ const MainCard = (props: MainCardData) => {
                         <View>
                             <Image
                                 style={styles.image}
-                                source={weatherCondition?.image2}
+                                source={weatherCondition?.image}
                             />
                         </View>
                     </Pressable>

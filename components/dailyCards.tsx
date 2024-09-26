@@ -29,7 +29,7 @@ const DailyCards = (props: { latLonData: LatLonData }) => {
             <View style={{ alignItems: 'center' }}>
                 <Image
                     style={styles.image}
-                    source={weatherCondition?.image2}
+                    source={weatherCondition?.image}
                 />
                 <Text style={[styles.text, styles.weatherDescription]}>{weatherCondition?.description}</Text>
             </View>
