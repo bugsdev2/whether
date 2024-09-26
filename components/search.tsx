@@ -18,8 +18,14 @@ const Search = (props: { iconDisplay: () => void }) => {
 
     const searchSuggestions = data?.map((item) => {
         return (
-            <View key={item.id} style={styles.searchSuggestions}>
-                <Pressable onPress={() => handleLocationSelection(item?.name, item?.latitude, item?.longitude, item?.admin1, item?.country)} onTouchStart={() => handleLocationSelection(item?.name, item?.latitude, item?.longitude, item?.admin1, item?.country)}>
+            <View
+                key={item.id}
+                style={styles.searchSuggestions}
+            >
+                <Pressable
+                    onPress={() => handleLocationSelection(item?.name, item?.latitude, item?.longitude, item?.admin1, item?.country)}
+                    onTouchStart={() => handleLocationSelection(item?.name, item?.latitude, item?.longitude, item?.admin1, item?.country)}
+                >
                     <Text style={styles.text}>
                         {item?.name}
                         {item?.admin1 && ', ' + item?.admin1 + ','} {item?.country}
@@ -32,7 +38,14 @@ const Search = (props: { iconDisplay: () => void }) => {
     return (
         <View>
             <View style={styles.inputContainer}>
-                <TextInput style={styles.input} autoFocus value={searchQuery} placeholder="enter the location here" placeholderTextColor={Colors.lightMode.light} onChangeText={(query) => setSearchQuery(query)} />
+                <TextInput
+                    style={styles.input}
+                    autoFocus
+                    value={searchQuery}
+                    placeholder="enter the location here"
+                    placeholderTextColor={Colors.lightMode.light}
+                    onChangeText={(query) => setSearchQuery(query)}
+                />
             </View>
             <View style={{ alignItems: 'center' }}>{searchSuggestions}</View>
             {/* <FlatList
@@ -58,7 +71,7 @@ const Search = (props: { iconDisplay: () => void }) => {
     );
 };
 
-export default React.memo(Search);
+export default Search;
 
 const styles = StyleSheet.create({
     inputContainer: {

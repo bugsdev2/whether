@@ -6,12 +6,12 @@ import { Colors } from '@/constants/Colors';
 const App = () => {
     return (
         <SafeAreaView style={styles.container}>
-            <HomeScreen />;
+            <HomeScreen />
         </SafeAreaView>
     );
 };
 
-export default React.memo(App);
+export default App;
 
 const styles = StyleSheet.create({
     container: {

@@ -60,7 +60,10 @@ const Hourlyweather = () => {
         const weatherCondition = processWeatherCode(code, timeOfDay);
         return (
             <View style={styles.weatherImgContainer}>
-                <Image style={styles.image} source={weatherCondition?.image2} />
+                <Image
+                    style={styles.image}
+                    source={weatherCondition?.image2}
+                />
                 <Text style={[styles.text, styles.weatherDescription]}>{weatherCondition?.description}</Text>
             </View>
         );
@@ -97,8 +100,15 @@ const Hourlyweather = () => {
             <View style={{ flex: 1 }}>
                 <SafeAreaView style={styles.container}>
                     <View style={styles.headerContainer}>
-                        <Pressable onPress={() => navigate.goBack()} style={styles.iconBg}>
-                            <Icon name="arrow-left" style={styles.text} color="white" />
+                        <Pressable
+                            onPress={() => navigate.goBack()}
+                            style={styles.iconBg}
+                        >
+                            <Icon
+                                name="arrow-left"
+                                style={styles.text}
+                                color="white"
+                            />
                         </Pressable>
                         <View>
                             <Text style={[styles.text, styles.title]}>{processTime(date, 'titleDate')}</Text>
@@ -108,7 +118,10 @@ const Hourlyweather = () => {
                         keyExtractor={(item) => item.time!.toString()}
                         data={finalHourlyData}
                         renderItem={({ item }) => (
-                            <View key={item.time} style={styles.card}>
+                            <View
+                                key={item.time}
+                                style={styles.card}
+                            >
                                 <View>
                                     <Text style={[styles.text, styles.time]}>{processTime(item.time!, 'duration')}</Text>
                                     <View>
@@ -116,30 +129,48 @@ const Hourlyweather = () => {
                                         <View style={styles.cardDetails}>
                                             <View style={styles.cardColumn}>
                                                 <View style={styles.smallIconContainer}>
-                                                    <MIcon style={styles.smallIcon} name="thermostat" />
+                                                    <MIcon
+                                                        style={styles.smallIcon}
+                                                        name="thermostat"
+                                                    />
                                                     <Text style={styles.text}>{`${item?.temperature_2m}°C`}</Text>
                                                 </View>
                                                 <View style={styles.smallIconContainer}>
-                                                    <MIcon style={styles.smallIcon} name="water-drop" />
+                                                    <MIcon
+                                                        style={styles.smallIcon}
+                                                        name="water-drop"
+                                                    />
                                                     <Text style={styles.text}>{`${item?.relative_humidity_2m}%`}</Text>
                                                 </View>
                                                 <View style={styles.smallIconContainer}>
-                                                    <MIcon style={styles.smallIcon} name="cloudy-snowing" />
+                                                    <MIcon
+                                                        style={styles.smallIcon}
+                                                        name="cloudy-snowing"
+                                                    />
                                                     <Text style={styles.text}>{`${item?.precipitation_probability}%`}</Text>
                                                 </View>
                                             </View>
                                             <View style={[styles.cardColumn, { alignItems: 'flex-end' }]}>
                                                 <View style={styles.smallIconContainer}>
                                                     <Text style={styles.text}>{`${item?.wind_speed_10m} km/h`}</Text>
-                                                    <Icon style={styles.smallIcon} name="wind" />
+                                                    <Icon
+                                                        style={styles.smallIcon}
+                                                        name="wind"
+                                                    />
                                                 </View>
                                                 <View style={styles.smallIconContainer}>
                                                     <Text style={styles.text}>{`${item?.uv_index} ${processUvIndex(item?.uv_index!)}`}</Text>
-                                                    <MIcon style={styles.smallIcon} name="sunny" />
+                                                    <MIcon
+                                                        style={styles.smallIcon}
+                                                        name="sunny"
+                                                    />
                                                 </View>
                                                 <View style={styles.smallIconContainer}>
                                                     <Text style={styles.text}>{`${processDistance(item?.visibility!)} km`}</Text>
-                                                    <MIcon style={styles.smallIcon} name="remove-red-eye" />
+                                                    <MIcon
+                                                        style={styles.smallIcon}
+                                                        name="remove-red-eye"
+                                                    />
                                                 </View>
                                             </View>
                                         </View>
@@ -154,7 +185,7 @@ const Hourlyweather = () => {
     }
 };
 
-export default Hourlyweather;
+export default React.memo(Hourlyweather);
 
 const styles = StyleSheet.create({
     container: {
@@ -230,6 +261,7 @@ const styles = StyleSheet.create({
     smallIcon: {
         color: Colors.lightMode.light,
         fontSize: 24,
+        opacity: 0.5,
     },
 
     image: {
