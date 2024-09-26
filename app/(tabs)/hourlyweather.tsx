@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Pressable, StyleSheet, ScrollView, Dimensions, Text, Image, FlatList } from 'react-native';
+import { View, Pressable, StyleSheet, Dimensions, Text, Image, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from '@expo/vector-icons/Feather';
 import MIcon from '@expo/vector-icons/MaterialIcons';

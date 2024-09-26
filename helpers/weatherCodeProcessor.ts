@@ -14,6 +14,5 @@ export function processWeatherCode(code: number, timeOfDay: string = 'day'): Wea
     return {
         description: '',
         image: undefined,
-        image2: undefined,
     };
 }

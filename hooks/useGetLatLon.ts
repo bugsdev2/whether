@@ -32,7 +32,7 @@ export const useGetLanLon = (place: string) => {
 
     useEffect(() => {
         axios
-            .get(`http://geocoding-api.open-meteo.com/v1/search?name=${place}&count=5&language=en&format=json`)
+            .get(`https://geocoding-api.open-meteo.com/v1/search?name=${place}&count=5&language=en&format=json`)
             .then((res) => {
                 if (!res.data.results) setData(initialState);
                 setData(res.data.results);
