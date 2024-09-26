@@ -52,13 +52,31 @@ const HomeScreen = () => {
     }, [latLonData]);
 
     return (
-        <ScrollView contentContainerStyle={styles.container} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-            <Pressable style={styles.searchIconContainer} onPress={() => setSearchIconDisplay(false)}>
-                <Feather name="search" style={[!searchIconDisplay && { display: 'none' }, styles.searchIcon]} />
+        <ScrollView
+            contentContainerStyle={styles.container}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
+            }
+        >
+            <Pressable
+                style={styles.searchIconContainer}
+                onPress={() => setSearchIconDisplay(false)}
+            >
+                <Feather
+                    name="search"
+                    style={[!searchIconDisplay && { display: 'none' }, styles.searchIcon]}
+                />
             </Pressable>
             <View style={styles.searchInputContainer}>{searchIconDisplay ? null : <Search iconDisplay={() => handleIconDisplay()} />}</View>
             <View style={styles.mainCardContainer}>
-                <MainCard latLonData={latLonData} weatherData={weatherData} weatherCondition={weatherCondition} />
+                <MainCard
+                    latLonData={latLonData}
+                    weatherData={weatherData}
+                    weatherCondition={weatherCondition}
+                />
             </View>
             <View style={styles.dailyCardsContainer}>
                 <DailyCards latLonData={latLonData} />
@@ -67,7 +85,7 @@ const HomeScreen = () => {
     );
 };
 
-export default React.memo(HomeScreen);
+export default HomeScreen;
 
 const styles = StyleSheet.create({
     container: {

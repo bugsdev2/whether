@@ -1,6 +1,6 @@
 export interface WeatherData {
-    current?: { apparent_temperature: number; interval: number; is_day: number; rain: number; relative_humidity_2m: number; showers: number; snowfall: number; temperature_2m: number; time: string; weather_code: number };
-    current_units?: { apparent_temperature: string; interval: string; is_day: string; rain: string; relative_humidity_2m: string; showers: string; snowfall: string; temperature_2m: string; time: string; weather_code: string };
+    current?: { apparent_temperature: number; interval: number; is_day: number; rain: number; relative_humidity_2m: number; showers: number; snowfall: number; temperature_2m: number; time: string; weather_code: number; precipitation: number; wind_speed_10m: number };
+    current_units?: { apparent_temperature: string; interval: string; is_day: string; rain: string; relative_humidity_2m: string; showers: string; snowfall: string; temperature_2m: string; time: string; weather_code: string; precipitation: string; wind_speed_10m: string };
     daily?: {
         apparent_temperature_max: number[];
         apparent_temperature_min: number[];

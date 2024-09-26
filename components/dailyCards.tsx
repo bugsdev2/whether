@@ -27,7 +27,10 @@ const DailyCards = (props: { latLonData: LatLonData }) => {
         const weatherCondition = processWeatherCode(code);
         return (
             <View style={{ alignItems: 'center' }}>
-                <Image style={styles.image} source={weatherCondition?.image2} />
+                <Image
+                    style={styles.image}
+                    source={weatherCondition?.image2}
+                />
                 <Text style={[styles.text, styles.weatherDescription]}>{weatherCondition?.description}</Text>
             </View>
         );
@@ -49,13 +52,18 @@ const DailyCards = (props: { latLonData: LatLonData }) => {
         return (
             <FlatList
                 contentContainerStyle={styles.flatlistContainer}
-                key={'_'}
                 data={data}
                 keyExtractor={(_, index) => index.toString()}
                 renderItem={({ item }) => {
                     return (
-                        <Link asChild href="/(tabs)/hourlyweather">
-                            <Pressable onTouchStart={() => handleTouchStart(item?.time)} style={styles.container}>
+                        <Link
+                            asChild
+                            href="/(tabs)/hourlyweather"
+                        >
+                            <Pressable
+                                onTouchStart={() => handleTouchStart(item?.time)}
+                                style={styles.container}
+                            >
                                 <Text style={[styles.date, styles.text]}>{processTime(item?.time, 'titleDate')}</Text>
                                 <View style={styles.boxContainer}>
                                     <Text style={[styles.text, styles.temp]}>

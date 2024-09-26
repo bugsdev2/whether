@@ -10,14 +10,14 @@
         "splash": {
             "image": "./assets/images/splash.png",
             "resizeMode": "cover",
-            "backgroundColor": "#ffffff"
+            "backgroundColor": "#292929"
         },
         "ios": {
             "supportsTablet": true
         },
         "android": {
             "package": "com.compass.cloud",
-            "versionCode": 2,
+            "versionCode": 3,
             "adaptiveIcon": {
                 "foregroundImage": "./assets/images/adaptive-icon.png",
                 "backgroundColor": "#ffffff"
