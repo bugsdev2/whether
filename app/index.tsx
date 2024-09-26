@@ -1,21 +1,21 @@
-import { ImageBackground, Dimensions, StyleSheet } from 'react-native';
+import { ImageBackground, Dimensions, StyleSheet, View, SafeAreaView } from 'react-native';
 import React from 'react';
 import HomeScreen from '@/app/(tabs)/homescreen';
+import { Colors } from '@/constants/Colors';
 
 const App = () => {
     return (
-        <ImageBackground style={[styles.imageBg]} resizeMode="cover" source={require('@/assets/images/bluesky.png')}>
-            <HomeScreen />
-        </ImageBackground>
+        <SafeAreaView style={styles.container}>
+            <HomeScreen />;
+        </SafeAreaView>
     );
 };
 
 export default React.memo(App);
 
 const styles = StyleSheet.create({
-    imageBg: {
-        zIndex: -40,
-        height: Dimensions.get('window').height,
-        width: Dimensions.get('window').width,
+    container: {
+        flex: 1,
+        backgroundColor: Colors.darkMode.dark,
     },
 });

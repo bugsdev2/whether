@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginBottom: 15,
         borderRadius: 20,
-        backgroundColor: Colors.lightMode.richblack,
+        backgroundColor: Colors.darkMode.secondary,
     },
 
     image: {
