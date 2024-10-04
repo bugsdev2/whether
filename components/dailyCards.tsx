@@ -4,7 +4,7 @@ import { useFonts } from 'expo-font';
 import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
 
 import { Colors } from '@/constants/Colors';
-import { useGetWeatherData } from '@/hooks/useGetWeatherData';
+import { getDailyWeatherData } from '@/helpers/getDailyWeatherData';
 import { LatLonData } from '@/interfaces/latLonData';
 import { getProcessedDailyData } from '@/helpers/processDailyWeatherData';
 import { processWeatherCode } from '@/helpers/weatherCodeProcessor';
@@ -19,7 +19,7 @@ const DailyCards = (props: { latLonData: LatLonData }) => {
         setData('time', time);
     }
 
-    const [weatherData] = useGetWeatherData(props.latLonData.name, props.latLonData?.lat!, props.latLonData?.lon!);
+    const weatherData = getDailyWeatherData(props.latLonData.name, props.latLonData?.lat!, props.latLonData?.lon!);
 
     const data = getProcessedDailyData(weatherData.daily)?.toSpliced(0, 1);
 

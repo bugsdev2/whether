@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View, Pressable, StyleSheet, Dimensions, Text, Image, FlatList } from 'react-native';
+import { View, Pressable, StyleSheet, Dimensions, Text, Image, FlatList, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from '@expo/vector-icons/Feather';
 import MIcon from '@expo/vector-icons/MaterialIcons';
 import { useNavigation } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
+import { addEventListener } from '@react-native-community/netinfo';
 
 import { getHourlyWeatherData } from '@/helpers/getHourlyWeatherData';
+import { HourlyWeatherData } from '@/interfaces/hourlyWeatherData';
 import { getData } from '@/helpers/storage';
 import { LatLonData } from '@/interfaces/latLonData';
 import { getProcessedHourlyData } from '@/helpers/processHourlyData';
@@ -25,6 +27,13 @@ const Hourlyweather = () => {
 
     const [latLonData, setLatLonData] = useState<LatLonData>({ name: '', lat: 0, lon: 0, admin1: '', country: '' });
 
+    addEventListener((state) => {
+        if (!state.isConnected) {
+            console.log(state.isConnected);
+            Alert.alert('Connection Error', 'Cloud Compass needs to have an active internet connection to work. \nPlease connect to the internet and restart the app.');
+        }
+    });
+
     useEffect(() => {
         getData('latLonData').then((res) => {
             setLatLonData(res!);
@@ -34,7 +43,7 @@ const Hourlyweather = () => {
         });
     }, []);
 
-    var hourlyData = getHourlyWeatherData(latLonData?.name, latLonData?.lat, latLonData?.lon).hourly;
+    let hourlyData = getHourlyWeatherData(latLonData?.name, latLonData?.lat, latLonData?.lon).hourly!;
 
     const processedHourlyData = getProcessedHourlyData(hourlyData);
 

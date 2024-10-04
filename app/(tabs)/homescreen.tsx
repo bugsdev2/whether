@@ -1,10 +1,11 @@
-import { StyleSheet, Pressable, View, ScrollView, RefreshControl, Dimensions } from 'react-native';
+import { StyleSheet, Pressable, View, ScrollView, RefreshControl, Dimensions, Alert } from 'react-native';
+import { addEventListener } from '@react-native-community/netinfo';
 import React, { useState, useEffect } from 'react';
 
 import { Colors } from '@/constants/Colors';
 import { Feather } from '@expo/vector-icons';
 import { getData } from '@/helpers/storage';
-import { useGetWeatherData } from '@/hooks/useGetWeatherData';
+import { getDailyWeatherData } from '@/helpers/getDailyWeatherData';
 import { processWeatherCode } from '@/helpers/weatherCodeProcessor';
 
 import Search from '@/components/search';
@@ -13,6 +14,7 @@ import DailyCards from '@/components/dailyCards';
 
 import { LatLonData } from '@/interfaces/latLonData';
 import { WeatherCondition } from '@/interfaces/weatherCondition';
+import { WeatherData } from '@/interfaces/weatherData';
 
 const HomeScreen = () => {
     //////////////////// search icon display ////////////////////
@@ -25,12 +27,32 @@ const HomeScreen = () => {
 
     const [latLonData, setLatLonData] = useState<LatLonData>({ name: '', lat: 0, lon: 0, admin1: '', country: '' });
 
-    let [weatherData, error] = useGetWeatherData(latLonData?.name, latLonData?.lat!, latLonData?.lon!);
+    let weatherData = getDailyWeatherData(latLonData?.name, latLonData?.lat, latLonData?.lon);
 
-    let timeOfDay: 'day' | 'night' = weatherData!.current?.is_day ? 'day' : 'night';
-    const weatherCondition: WeatherCondition = processWeatherCode(weatherData?.current?.weather_code!, timeOfDay);
+    addEventListener((state) => {
+        if (!state.isConnected) {
+            console.log(state.isConnected);
+            Alert.alert('Connection Error', 'Cloud Compass needs to have an active internet connection to work. \nPlease connect to the internet and restart the app.');
+        }
+    });
 
-    const [refreshing, setRefreshing] = React.useState(false);
+    // useEffect(() => {
+    //     getData('weatherData').then((data) => {
+    //         if (!data || Object.keys(data).length === 0) {
+    //             setData('weatherData', weatherData).then((_) => {
+    //                 console.log('Weather Data saved to device');
+    //             });
+    //         }
+    //     });
+    // }, [weatherData]);
+
+    useEffect(() => {
+        getData('latLonData').then((data) => {
+            if (!data) {
+                Alert.alert('Welcome to Cloud Compass', 'Please use the search icon on the top right corner of the screen to select your location.');
+            }
+        });
+    }, []);
 
     useEffect(() => {
         getData('latLonData').then((data) => {
@@ -40,27 +62,38 @@ const HomeScreen = () => {
         });
     }, [searchIconDisplay]); // using searchIconDisplay so that the function runs when it changes
 
-    const onRefresh = React.useCallback(() => {
-        setRefreshing(true);
-        setTimeout(() => {
-            getData('latLonData').then((data) => {
-                if (data) {
-                    setLatLonData(data);
-                }
-            });
-            setRefreshing(false);
-        }, 2000);
-    }, [latLonData]);
+    let timeOfDay: 'day' | 'night' = weatherData?.current?.is_day ? 'day' : 'night';
+
+    const weatherCondition: WeatherCondition = processWeatherCode(weatherData?.current?.weather_code!, timeOfDay);
+
+    // // Currently commenting out refresh code as it doesn't work
+    // const [refreshing, setRefreshing] = React.useState(false);
+    // const onRefresh = () => {
+    //     setRefreshing(true);
+    //     getData('latLonData').then((data: LatLonData) => {
+    //         if (data) {
+    //             setLatLonData(data);
+    //         }
+    //     });
+    //     getData('weatherData').then((data: WeatherData) => {
+    //         if (data) {
+    //             setDailyWeatherData(data);
+    //         }
+    //     });
+    //     setTimeout(() => {
+    //         setRefreshing(false);
+    //     }, 2000);
+    // };
 
     return (
         <ScrollView
             contentContainerStyle={styles.container}
-            refreshControl={
-                <RefreshControl
-                    refreshing={refreshing}
-                    onRefresh={onRefresh}
-                />
-            }
+            // refreshControl={
+            //     <RefreshControl
+            //         refreshing={refreshing}
+            //         onRefresh={onRefresh}
+            //     />
+            // }
         >
             <Pressable
                 style={styles.searchIconContainer}
