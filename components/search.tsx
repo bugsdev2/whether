@@ -17,22 +17,24 @@ const Search = (props: { iconDisplay: () => void }) => {
     const data = useGetLanLon(searchQuery ? searchQuery : '');
 
     const searchSuggestions = data?.map((item) => {
-        return (
-            <View
-                key={item.id}
-                style={styles.searchSuggestions}
-            >
-                <Pressable
-                    onPress={() => handleLocationSelection(item?.name, item?.latitude, item?.longitude, item?.admin1, item?.country)}
-                    onTouchStart={() => handleLocationSelection(item?.name, item?.latitude, item?.longitude, item?.admin1, item?.country)}
+        if (item.latitude !== 0 && item.longitude !== 0) {
+            return (
+                <View
+                    key={item.id}
+                    style={styles.searchSuggestions}
                 >
-                    <Text style={styles.text}>
-                        {item?.name}
-                        {item?.admin1 && ', ' + item?.admin1 + ','} {item?.country}
-                    </Text>
-                </Pressable>
-            </View>
-        );
+                    <Pressable
+                        onPress={() => handleLocationSelection(item?.name, item?.latitude, item?.longitude, item?.admin1, item?.country)}
+                        onTouchStart={() => handleLocationSelection(item?.name, item?.latitude, item?.longitude, item?.admin1, item?.country)}
+                    >
+                        <Text style={styles.text}>
+                            {item?.name}
+                            {item?.admin1 && ', ' + item?.admin1 + ','} {item?.country}
+                        </Text>
+                    </Pressable>
+                </View>
+            );
+        }
     });
 
     return (
@@ -47,7 +49,7 @@ const Search = (props: { iconDisplay: () => void }) => {
                     onChangeText={(query) => setSearchQuery(query)}
                 />
             </View>
-            <View style={{ alignItems: 'center' }}>{searchSuggestions}</View>
+            {searchSuggestions && <View style={{ alignItems: 'center' }}>{searchSuggestions}</View>}
             {/* <FlatList
                 keyboardShouldPersistTaps="handled"
                 style={styles.flatListView}
