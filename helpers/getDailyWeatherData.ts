@@ -20,6 +20,7 @@ export const getDailyWeatherData = (name: string, lat: number = 0, lon: number =
                 setData(res.data);
             })
             .catch((error) => {
+                console.log(error);
                 setErr(error);
             });
     }, [name]);

@@ -9,7 +9,6 @@ import { PortLligatSlab_400Regular } from '@expo-google-fonts/port-lligat-slab';
 import { addEventListener } from '@react-native-community/netinfo';
 
 import { getHourlyWeatherData } from '@/helpers/getHourlyWeatherData';
-import { HourlyWeatherData } from '@/interfaces/hourlyWeatherData';
 import { getData } from '@/helpers/storage';
 import { LatLonData } from '@/interfaces/latLonData';
 import { getProcessedHourlyData } from '@/helpers/processHourlyData';
