@@ -50,25 +50,6 @@ const Search = (props: { iconDisplay: () => void }) => {
                 />
             </View>
             {searchSuggestions && <View style={{ alignItems: 'center' }}>{searchSuggestions}</View>}
-            {/* <FlatList
-                keyboardShouldPersistTaps="handled"
-                style={styles.flatListView}
-                data={data}
-                renderItem={({ item }) => {
-                    return (
-                        <View style={styles.searchSuggestions}>
-                            <Pressable onPress={() => handleLocationSelection(item.name, item.latitude, item.longitude, item.admin1, item.country)}>
-                                <Text style={styles.text}>
-                                    {item.name}
-                                    {item.admin1 && ', ' + item.admin1 + ','} {item.country}
-                                </Text>
-                            </Pressable>
-                        </View>
-                    );
-                }}
-                keyExtractor={(item) => item.id.toString()}
-                ListEmptyComponent={<View style={{ display: 'none' }}></View>}
-            /> */}
         </View>
     );
 };
