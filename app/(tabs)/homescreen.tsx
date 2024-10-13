@@ -66,6 +66,14 @@ const HomeScreen = () => {
 
     const weatherCondition: WeatherCondition = processWeatherCode(weatherData?.current?.weather_code!, timeOfDay);
 
+    function handleSearchCloseOnOutsideClick(item: any) {
+        // Adjustment code to be able to click outside the search input to close it
+        console.log(item.target['_internalFiberInstanceHandleDEV']?.['memoizedProps']?.['data-key']);
+        if (!item.target['_internalFiberInstanceHandleDEV']?.['memoizedProps']?.['data-key']) {
+            setSearchIconDisplay(true);
+        }
+    }
+
     // // Currently commenting out refresh code as it doesn't work
     // const [refreshing, setRefreshing] = React.useState(false);
     // const onRefresh = () => {
@@ -86,35 +94,31 @@ const HomeScreen = () => {
     // };
 
     return (
-        <ScrollView
-            contentContainerStyle={styles.container}
-            // refreshControl={
-            //     <RefreshControl
-            //         refreshing={refreshing}
-            //         onRefresh={onRefresh}
-            //     />
-            // }
-        >
-            <Pressable
-                style={styles.searchIconContainer}
-                onPress={() => setSearchIconDisplay(false)}
-            >
-                <Feather
-                    name="search"
-                    style={[!searchIconDisplay && { display: 'none' }, styles.searchIcon]}
-                />
+        <ScrollView contentContainerStyle={styles.container}>
+            <Pressable onTouchStart={handleSearchCloseOnOutsideClick}>
+                <Pressable
+                    style={styles.searchIconContainer}
+                    onPress={() => setSearchIconDisplay(false)}
+                    data-key="search-icon-container"
+                >
+                    <Feather
+                        name="search"
+                        data-key="search-icon"
+                        style={[!searchIconDisplay && { display: 'none' }, styles.searchIcon]}
+                    />
+                </Pressable>
+                <View style={styles.searchInputContainer}>{searchIconDisplay ? null : <Search iconDisplay={() => handleIconDisplay()} />}</View>
+                <View style={styles.mainCardContainer}>
+                    <MainCard
+                        latLonData={latLonData}
+                        weatherData={weatherData}
+                        weatherCondition={weatherCondition}
+                    />
+                </View>
+                <View style={styles.dailyCardsContainer}>
+                    <DailyCards latLonData={latLonData} />
+                </View>
             </Pressable>
-            <View style={styles.searchInputContainer}>{searchIconDisplay ? null : <Search iconDisplay={() => handleIconDisplay()} />}</View>
-            <View style={styles.mainCardContainer}>
-                <MainCard
-                    latLonData={latLonData}
-                    weatherData={weatherData}
-                    weatherCondition={weatherCondition}
-                />
-            </View>
-            <View style={styles.dailyCardsContainer}>
-                <DailyCards latLonData={latLonData} />
-            </View>
         </ScrollView>
     );
 };

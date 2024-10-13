@@ -2,7 +2,7 @@
     "expo": {
         "name": "Cloud Compass",
         "slug": "cloudcompass",
-        "version": "0.0.3",
+        "version": "0.0.4",
         "orientation": "portrait",
         "icon": "./assets/images/icon.png",
         "scheme": "myapp",
@@ -17,7 +17,7 @@
         },
         "android": {
             "package": "com.compass.cloud",
-            "versionCode": 4,
+            "versionCode": 5,
             "adaptiveIcon": {
                 "foregroundImage": "./assets/images/adaptive-icon.png",
                 "backgroundColor": "#ffffff"

@@ -41,6 +41,7 @@ const Search = (props: { iconDisplay: () => void }) => {
         <View>
             <View style={styles.inputContainer}>
                 <TextInput
+                    data-key="search-container"
                     style={styles.input}
                     autoFocus
                     value={searchQuery}
