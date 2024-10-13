@@ -15,8 +15,9 @@ export const getHourlyWeatherData = (name: string, lat: number = 0, lon: number 
             .then((res) => {
                 setData(res.data);
             })
-            .catch((err) => {
-                setErr(err);
+            .catch((error) => {
+                console.log(error);
+                setErr(error);
             });
     }, [name]);
 
